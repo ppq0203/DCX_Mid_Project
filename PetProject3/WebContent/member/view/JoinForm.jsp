@@ -77,38 +77,7 @@
 						<input type="text" name="name" maxlength="50">
 					</td>
 				</tr>
-					
-				<tr>
-					<td id="title">성별</td>
-					<td>
-						<input type="radio" name="gender" value="남" checked>남
-						<input type="radio" name="gender" value="여" checked>여
-					</td>
-				</tr>
-					
-				<tr>
-					<td id="title">생일</td>
-					<td>
-						<input type="text" name="birthyy" maxlength="4" placeholder="년(4자)" size="6" >
-						<select name="birthmm">
-							<option value="">월</option>
-							<option value="01" >1</option>
-							<option value="02" >2</option>
-							<option value="03" >3</option>
-							<option value="04" >4</option>
-							<option value="05" >5</option>
-							<option value="06" >6</option>
-							<option value="07" >7</option>
-							<option value="08" >8</option>
-							<option value="09" >9</option>
-							<option value="10" >10</option>
-							<option value="11" >11</option>
-							<option value="12" >12</option>
-						</select>
-						<input type="text" name="birthdd" maxlength="2" placeholder="일" size="4" >
-					</td>
-				</tr>
-					
+									
 				<tr>
 					<td id="title">이메일</td>
 					<td>

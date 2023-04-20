@@ -89,22 +89,7 @@
                     <td><input type="text" name="name" size = "50" maxlength="50" 
                             value="<%=mb.getName()%> "></td>
                 </tr>
-                    
-                <tr>
-                    <td id="title">성별</td>
-                    <td><%=mb.getGender()%></td>
-                </tr>
-                    
-                <tr>
-                    <td id="title">생일</td>
-                    <td>
-                    <input type="text" name="birthyy" size = "15" value="<%=mb.getBirthyy() %>" placeholder="년(4자)">
-						<input type="text" name="birthmm" size = "15" value="<%=mb.getBirthmm() %>" placeholder="월">
-						<input type="text" name="birthdd" size = "15" value="<%=mb.getBirthdd() %>"placeholder="일">
-                        
-                    </td>
-                </tr>
-                    
+                          
                 <tr>
                     <td id="title">이메일</td>
                     <td>

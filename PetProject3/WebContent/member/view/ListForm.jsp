@@ -36,9 +36,7 @@
 	 	<td>아이디</td>
 	 	<td>비밀번호</td>
 	 	<td>이름</td>
-	 	<td>성별</td>
 	 	<td>이메일</td>
-	 	<td>가입일</td>
 	 </tr>
 	 <%for(int i = 0;i<member.size();i++) {
 			MemberBean mb = (MemberBean)member.get(i);
@@ -48,10 +46,8 @@
 	 	<%=mb.getId() %></a></td>
 	 	<td><%=mb.getPassword()%></td>
 	 	<td><%=mb.getName() %></td>
-	 	<td><%=mb.getGender() %></td>
 	 	<td><%=mb.getMail1()%>@<%=mb.getMail2()%></td>
-	 	<td><%=mb.getReg()%></td>
-	 </tr>
+	 	</tr>
 	<%} %>
 	</table>
 		

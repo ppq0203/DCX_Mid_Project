@@ -25,7 +25,7 @@
 		{ 
 			// 세션에 현재 아이디 세팅
 			session.setAttribute("sessionID", id);
-			if(id != "admin"){
+			if(id != "null"){
 				msg = "../view/ListForm.jsp";
 			}else{
 				msg = "../../MainForm.jsp";

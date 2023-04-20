@@ -35,18 +35,7 @@ public class MemberDAO
 	// 문자열로된 생년월일을 Date로 변경하기 위해 필요
 	// java.util.Date클래스로는 오라클의 Date형식과 연동할 수 없다.
 	// Oracle의 date형식과 연동되는 java의 Date는 java.sql.Date 클래스이다.
-	public Date stringToDate(MemberBean member)
-	{
-		String year = member.getBirthyy();
-		String month = member.getBirthmm();
-		String day = member.getBirthdd();
 		
-		Date birthday = Date.valueOf(year+"-"+month+"-"+day);
-		
-		return birthday;
-		
-	} // end stringToDate()
-	
 	// 회원정보를 JSP_MEMBER 테이블에 저장하는 메서드
 	public void insertMember(MemberBean member) throws SQLException
 	{
@@ -65,7 +54,7 @@ public class MemberDAO
 			StringBuffer sql = new StringBuffer();
 			sql.append("insert into JSP_MEMBER values");
 			sql.append("(?, ?, ?, ?, ?, ?, ?, ?, sysdate)");		
-			stringToDate(member);
+			
 			/* 
 			 * StringBuffer에 담긴 값을 얻으려면 toString()메서드를
 			 * 이용해야 한다.
@@ -73,12 +62,10 @@ public class MemberDAO
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, member.getId());
 			pstmt.setString(2, member.getPassword());
-			pstmt.setString(3, member.getName());
-			pstmt.setString(4, member.getGender());
-			pstmt.setDate(5, stringToDate(member));
-			pstmt.setString(6, member.getMail1()+"@"+member.getMail2());
-			pstmt.setString(7, member.getPhone());
-			pstmt.setString(8, member.getAddress());
+			pstmt.setString(3, member.getName());			
+			pstmt.setString(4, member.getMail1()+"@"+member.getMail2());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getAddress());
 			
 			// 쿼리 실행
 			pstmt.executeUpdate();
@@ -164,9 +151,9 @@ public class MemberDAO
 			ResultSet rs = null;
 			conn = DBConnection.getConnection();
 			// 3. sql 작성 (select) & pstmt 객체
-			sql = "select * from JSP_MEMBER where id != ?";
+			sql = "select * from Recipe_Login where id != ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "admin");
+			pstmt.setString(1, "id");
 					// 4. sql 실행
 			rs = pstmt.executeQuery();
 			
@@ -185,10 +172,9 @@ public class MemberDAO
 				mb.setId(rs.getString("id"));
 				mb.setPassword(rs.getString("password"));
 				mb.setName(rs.getString("name"));
-				mb.setGender(rs.getString("gender"));
 				mb.setMail1(mail1);
 				mb.setMail2(mail2);
-				mb.setReg(rs.getTimestamp("reg"));
+				
 				
 					//MemberBean -> ArrayList 
 				mList.add(mb);
@@ -253,15 +239,11 @@ public class MemberDAO
                 member.setId(rs.getString("id"));
                 member.setPassword(rs.getString("password"));
                 member.setName(rs.getString("name"));
-                member.setGender(rs.getString("gender"));
-                member.setBirthyy(year);
-                member.setBirthmm(month);
-                member.setBirthdd(day);
                 member.setMail1(mail1);
                 member.setMail2(mail2);
                 member.setPhone(rs.getString("phone"));
                 member.setAddress(rs.getString("address"));
-                member.setReg(rs.getTimestamp("reg"));
+                
            
             }
  
@@ -292,7 +274,7 @@ public void updateMember(MemberBean member) throws SQLException{
             query.append("UPDATE JSP_MEMBER SET");
             query.append("  PASSWORD=?, NAME=?, BIRTH=?, MAIL=?, PHONE=?, ADDRESS=?");
             query.append(" WHERE ID=?");
-            stringToDate(member);
+          
             
             conn = DBConnection.getConnection();
             pstmt = conn.prepareStatement(query.toString());
@@ -304,11 +286,11 @@ public void updateMember(MemberBean member) throws SQLException{
             pstmt.setString(1, member.getPassword());
             pstmt.setString(2, member.getName());
             
-            pstmt.setDate(3, stringToDate(member));
-            pstmt.setString(4, member.getMail1()+"@"+member.getMail2());
-            pstmt.setString(5, member.getPhone());
-            pstmt.setString(6, member.getAddress());
-            pstmt.setString(7, member.getId());
+          
+            pstmt.setString(3, member.getMail1()+"@"+member.getMail2());
+            pstmt.setString(4, member.getPhone());
+            pstmt.setString(5, member.getAddress());
+            pstmt.setString(6, member.getId());
  
             pstmt.executeUpdate();
             // 완료시 커밋

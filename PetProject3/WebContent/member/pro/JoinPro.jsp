@@ -56,21 +56,7 @@
 				<td id="title">이름</td>
 				<td><%=memberBean.getName() %></td>
 			</tr>
-					
-			<tr>
-				<td id="title">성별</td>
-				<td><%=memberBean.getGender()%></td>
-			</tr>
-					
-			<tr>
-				<td id="title">생일</td>
-				<td>
-					<%=memberBean.getBirthyy() %>년 
-					<%=memberBean.getBirthmm() %>월 
-					<%=memberBean.getBirthdd() %>일
-				</td>
-			</tr>
-					
+				
 			<tr>
 				<td id="title">이메일</td>
 				<td>
