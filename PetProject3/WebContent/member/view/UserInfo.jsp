@@ -61,21 +61,7 @@
                 <td id="title">이름</td>
                 <td><%=mb.getName() %></td>
             </tr>
-                    
-            <tr>
-                <td id="title">성별</td>
-                <td><%=mb.getGender()%></td>
-            </tr>
-                    
-            <tr>
-                <td id="title">생일</td>
-                <td>
-                    <%=mb.getBirthyy() %>년 
-                    <%=mb.getBirthmm() %>월 
-                    <%=mb.getBirthdd() %>일
-                </td>
-            </tr>
-                    
+                      
             <tr>
                 <td id="title">이메일</td>
                 <td>
