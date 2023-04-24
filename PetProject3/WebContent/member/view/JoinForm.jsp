@@ -46,7 +46,7 @@
 		
 		<!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
 		<!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
-		<form method="post" action="../pro/JoinPro.jsp" name="userInfo" 
+		<form method="get" action="../pro/JoinPro.jsp" name="userInfo" 
 				onsubmit="return checkValue()">
 			<table>
 				<tr>
@@ -60,7 +60,7 @@
 				<tr>
 					<td id="title">비밀번호</td>
 					<td>
-						<input type="password" name="password" maxlength="50">
+						<input type="password" name="pw" maxlength="50">
 					</td>
 				</tr>
 				
@@ -71,13 +71,7 @@
 					</td>
 				</tr>
 					
-				<tr>
-					<td id="title">이름</td>
-					<td>
-						<input type="text" name="name" maxlength="50">
-					</td>
-				</tr>
-									
+													
 				<tr>
 					<td id="title">이메일</td>
 					<td>

@@ -38,22 +38,27 @@ public class MemberDAO
 		
 	// 회원정보를 JSP_MEMBER 테이블에 저장하는 메서드
 	public void insertMember(MemberBean member) throws SQLException
-	{
+	{	
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			// 커넥션을 가져온다.
+			System.out.println("pass");
 			conn = DBConnection.getConnection();
+			System.out.println("pass1");
 			
 			// 자동 커밋을 false로 한다.
 			conn.setAutoCommit(false);
+			System.out.println("pass2");
 			
 			// 쿼리 생성한다.
 			// 가입일의 경우 자동으로 세팅되게 하기 위해 sysdate를 사용
 			StringBuffer sql = new StringBuffer();
-			sql.append("insert into JSP_MEMBER values");
-			sql.append("(?, ?, ?, ?, ?, ?, ?, ?, sysdate)");		
+			System.out.println("pass3");
+			sql.append("insert into Recipe_Login (id,pw,phone,address,email)values");
+			sql.append("(?, ?, ?, ?, ?)");		
 			
 			/* 
 			 * StringBuffer에 담긴 값을 얻으려면 toString()메서드를
@@ -61,18 +66,17 @@ public class MemberDAO
 			 */
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, member.getId());
-			pstmt.setString(2, member.getPassword());
-			pstmt.setString(3, member.getName());			
-			pstmt.setString(4, member.getMail1()+"@"+member.getMail2());
-			pstmt.setString(5, member.getPhone());
-			pstmt.setString(6, member.getAddress());
+			pstmt.setString(2, member.getPw());		
+			pstmt.setString(3, member.getMail1()+"@"+member.getMail2());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getAddress());
 			
 			// 쿼리 실행
 			pstmt.executeUpdate();
 			// 완료시 커밋
 			conn.commit(); 
 			
-		} catch (ClassNotFoundException | NamingException | SQLException sqle) {
+		} catch (ClassNotFoundException |  SQLException sqle) {
 			// 오류시 롤백
 			conn.rollback(); 
 			
@@ -91,7 +95,7 @@ public class MemberDAO
 	
 	// 로그인시 아이디, 비밀번호 체크 메서드
 	// 아이디, 비밀번호를 인자로 받는다.
-	public int loginCheck(String id, String pw) 
+	public int loginCheck(String id, String password) 
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -103,7 +107,7 @@ public class MemberDAO
 		try {
 			// 쿼리 - 먼저 입력된 아이디로 DB에서 비밀번호를 조회한다.
 			StringBuffer query = new StringBuffer();
-			query.append("SELECT PASSWORD FROM JSP_MEMBER WHERE ID=?");
+			query.append("SELECT pw FROM Recipe_Login WHERE id=?");
 
 			conn = DBConnection.getConnection();
 			pstmt = conn.prepareStatement(query.toString());
@@ -112,9 +116,9 @@ public class MemberDAO
 
 			if (rs.next()) // 입려된 아이디에 해당하는 비번 있을경우
 			{
-				dbPW = rs.getString("password"); // 비번을 변수에 넣는다.
+				dbPW = rs.getString("pw"); // 비번을 변수에 넣는다.
 
-				if (dbPW.equals(pw)) 
+				if (dbPW.equals(password)) 
 					x = 1; // 넘겨받은 비번과 꺼내온 배번 비교. 같으면 인증성공
 				else 				 
 					x = 0; // DB의 비밀번호와 입력받은 비밀번호 다름, 인증실패
@@ -170,8 +174,7 @@ public class MemberDAO
 				//디비(테이블 정보) -> MemberBean -> ArrayList에 넣기 
 				MemberBean mb = new MemberBean();
 				mb.setId(rs.getString("id"));
-				mb.setPassword(rs.getString("password"));
-				mb.setName(rs.getString("name"));
+				mb.setPw(rs.getString("pw"));
 				mb.setMail1(mail1);
 				mb.setMail2(mail2);
 				
@@ -213,7 +216,7 @@ public class MemberDAO
         try {
             // 쿼리
             StringBuffer query = new StringBuffer();
-            query.append("SELECT * FROM JSP_MEMBER WHERE ID=?");
+            query.append("SELECT * FROM Recipe_Login WHERE id=?");
  
             conn = DBConnection.getConnection();
             pstmt = conn.prepareStatement(query.toString());
@@ -222,11 +225,6 @@ public class MemberDAO
  
             if (rs.next()) // 회원정보를 DTO에 담는다.
             {
-                // DB의 생년월일정보 -> 년, 월, 일로 문자열 자른다.
-                String birthday = rs.getDate("birth").toString();
-                String year = birthday.substring(0, 4);
-                String month = birthday.substring(5, 7);
-                String day = birthday.substring(8, 10);
                 
                 // 이메일을 @ 기준으로 자른다.
                 String mail = rs.getString("mail");
@@ -237,8 +235,7 @@ public class MemberDAO
                 // 자바빈에 정보를 담는다.
                 member = new MemberBean();
                 member.setId(rs.getString("id"));
-                member.setPassword(rs.getString("password"));
-                member.setName(rs.getString("name"));
+                member.setPw(rs.getString("pw"));                
                 member.setMail1(mail1);
                 member.setMail2(mail2);
                 member.setPhone(rs.getString("phone"));
@@ -271,8 +268,8 @@ public void updateMember(MemberBean member) throws SQLException{
         try {
  
             StringBuffer query = new StringBuffer();
-            query.append("UPDATE JSP_MEMBER SET");
-            query.append("  PASSWORD=?, NAME=?, BIRTH=?, MAIL=?, PHONE=?, ADDRESS=?");
+            query.append("UPDATE Recipe_Login SET");
+            query.append("  PW=?, PHONE=?, ADDRESS=?");
             query.append(" WHERE ID=?");
           
             
@@ -283,14 +280,11 @@ public void updateMember(MemberBean member) throws SQLException{
             conn.setAutoCommit(false);
            
             
-            pstmt.setString(1, member.getPassword());
-            pstmt.setString(2, member.getName());
-            
-          
-            pstmt.setString(3, member.getMail1()+"@"+member.getMail2());
-            pstmt.setString(4, member.getPhone());
-            pstmt.setString(5, member.getAddress());
-            pstmt.setString(6, member.getId());
+            pstmt.setString(1, member.getPw());  
+            pstmt.setString(2, member.getMail1()+"@"+member.getMail2());
+            pstmt.setString(3, member.getPhone());
+            pstmt.setString(4, member.getAddress());
+            pstmt.setString(5, member.getId());
  
             pstmt.executeUpdate();
             // 완료시 커밋
@@ -322,11 +316,11 @@ public void updateMember(MemberBean member) throws SQLException{
         try {
             // 비밀번호 조회
             StringBuffer query1 = new StringBuffer();
-            query1.append("SELECT PASSWORD FROM JSP_MEMBER WHERE ID=?");
+            query1.append("SELECT PW FROM Recipe_Login WHERE ID=?");
  
             // 회원 삭제
             StringBuffer query2 = new StringBuffer();
-            query2.append("DELETE FROM JSP_MEMBER WHERE ID=?");
+            query2.append("DELETE FROM Recipe_Login WHERE ID=?");
  
             conn = DBConnection.getConnection();
  
@@ -335,12 +329,12 @@ public void updateMember(MemberBean member) throws SQLException{
             
             // 1. 아이디에 해당하는 비밀번호를 조회한다.
             pstmt = conn.prepareStatement(query1.toString());
-            pstmt.setString(1, "admin");
+            pstmt.setString(1, "id");
             rs = pstmt.executeQuery();
  
             if (rs.next()) 
             {
-                dbpw = rs.getString("password");
+                dbpw = rs.getString("pw");
                 if (dbpw.equals(pw)) // 입력된 비밀번호와 DB비번 비교
                 {
                     // 같을경우 회원삭제 진행

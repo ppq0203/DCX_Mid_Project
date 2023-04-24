@@ -25,11 +25,6 @@ function goLogForm() {
         // 세션에서 아이디를 가져와 MemberBean에 세팅한다.
         String id= request.getParameter("id"); 
     	String pwd = request.getParameter("password");
-    	String name = request.getParameter("name");
-    	String gender = request.getParameter("gender");
-    	String birthyy = request.getParameter("birthyy");
-    	String birthmm = request.getParameter("birthmm");
-    	String birthdd = request.getParameter("birthdd");
     	String mail1 = request.getParameter("mail1");
     	String mail2 = request.getParameter("mail2");
     	String phone = request.getParameter("phone");
@@ -37,12 +32,7 @@ function goLogForm() {
     		
     	
         memberBean.setId(id);
-        memberBean.setPassword(pwd);
-        memberBean.setName(name);
-        memberBean.setGender(gender);
-        memberBean.setBirthyy(birthyy);
-        memberBean.setBirthmm(birthmm);
-        memberBean.setBirthdd(birthdd);
+        memberBean.setPassword(pwd);        
         memberBean.setMail1(mail1);
         memberBean.setMail2(mail2);
         memberBean.setPhone(phone);
