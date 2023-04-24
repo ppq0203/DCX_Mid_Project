@@ -1,0 +1,9 @@
+0 egg
+1 potato
+2 chill_pepper
+3 carrot
+4 big_green_onion
+5 garlic
+6 radish
+7 cabbage
+8 onion
