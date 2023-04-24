@@ -61,7 +61,7 @@ public class Recipe_Login{
 //		데이터 출력
 			System.out.println("id: " + id);
 			System.out.println("pw: " + pw);
-			System.out.println("phone: " + phone);
+			System.out.println("phone: " + "0"+phone);
 			System.out.println("address: " + address);
 			System.out.println("email: " + email);
 		}else {
