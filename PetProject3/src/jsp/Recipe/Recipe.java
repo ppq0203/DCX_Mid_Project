@@ -12,13 +12,13 @@ import java.lang.ClassNotFoundException;
  * 1. driver 로딩
  * 2. 드라이버 관리자 등록
  * 3. 2번을 통해서 접속
- * 4. 명령문을 생성
- * 5. 명령문을 실행
- * 6. 결과테이블(레코드세트)
- * 7. 6번에서 데이터 get
- * 8. 6번을 close
- * 9. 4번 close
- * 10. 3번 close
+ * 4. select 명령문을 생성 및 실행
+ * 4-1. 4번 resultset close
+ * 5. update 명령문을 생성 및 실행
+ * 6. insert 명령문을 생성 및 실행
+ * 7. 데이터 삽입(레코드세트)
+ * 8. 4 or 5 close
+ * 9. 3번 close
  * 
  */
 public class Recipe{
@@ -49,8 +49,16 @@ public class Recipe{
 		sql = "select *from Recipe where r_num=";
 //		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
-		
 		ResultSet result = stmt.executeQuery(sql);
+		
+//		5. update 명령문을 생성 및 실행
+//		sql = "update Recipe set 컬럼 = ? where 컬럼 = ? "
+//		PreparedStatement stmt = con.prepareStatement(sql); 
+		
+//		stmt.setString(1,?);
+//		stmt.setString(2,?);
+//		int result = stmt.executeUpdate();
+//		System.out.println("Update 결과 : " + result); 
 //		 	
 		if (result.next()) {
 			long r_num = result.getLong("r_num");
@@ -72,14 +80,15 @@ public class Recipe{
 		}else {
 			System.out.println("레코드가 존재하지 않습니다.");
 		}  
-//		4번을 close
+//		4-1. 4번 resultset close
 		result.close();  
-//		5. insert 명령문을 생성 및 실행
+		
+//		6. insert 명령문을 생성 및 실행
 //		sql = "insert into Recipe(r_num, r_name, servings, r_level, r_time,r_recommend, r_category)" +
 //			  "values(?,?,?,?,?,?,?)";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
-//		5-1 데이터 삽입(레코드세트)
-
+			
+//		7. 데이터 삽입(레코드세트)
 //		stmt.setLong(1, L);
 //		stmt.setString(2, "");
 //		stmt.setString(3, "");
@@ -88,9 +97,9 @@ public class Recipe{
 //		stmt.setLong(6, L);
 //		stmt.setString(7, "");
 	 	 
-//		6. 4 or 5 close
+//		8. 4 or 5 close
 		stmt.close();
-//		7. 3번 close
+//		9. 3번 close
 		con.close();	
 		 
 	}}
