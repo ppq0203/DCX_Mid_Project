@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 
-item_code = str(100)
+item_code = str(600)
 key = "4325ba71-b578-41fe-bd9d-e5c81afdc067"
 url_api = "http://www.kamis.or.kr/service/price/xml.do?" \
           "action=dailyPriceByCategoryList&" \
