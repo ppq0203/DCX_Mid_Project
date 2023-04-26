@@ -38,11 +38,6 @@ df_data['unit'] = df_data['unit'].str.replace('g', '')
 df_data['dpr1'] = df_data['dpr1'].str.replace(',', '')
 # print(df_data['dpr1'])
 
-# 500g
-print(df_data.loc[:, 'unit'])
-df_data.loc['unit'] = 1
-print(df_data.loc[:, 'unit'])
-
 # str to int
 # print(df_data.dtypes)
 df_data['dpr1'] = pd.to_numeric(df_data['dpr1'])
@@ -58,12 +53,18 @@ df_data.loc[df_data['item_code'] == 151, 'dpr1'] = df_data.loc[df_data['item_cod
 df_data.loc[df_data['item_code'] == 152, 'dpr1'] = df_data.loc[df_data['item_code'] == 152, 'dpr1'] * 10
 print(df_data['dpr1'])
 
+# unit 1
+df_data.drop(['unit'], axis=1, inplace= True)
+df_data.insert(6, 'unit', 1)
+print(df_data['unit'])
+
 # drop
+df_data.drop(['kind_name'], axis=1, inplace=True)
 print(df_data.loc[:, 'day2':])
 df_data = df_data.drop(columns=df_data.loc[:, 'day2':])
 print(df_data)
 
-# df_data.to_csv("csv_file/price_100_v1.csv", encoding="ms949")
+df_data.to_csv("csv_file/price_100_pres.csv", encoding="ms949")
 
 # df_copy = df_data[['item_name', "item_code", "dpr1"]]
 # for df_row in df_copy:
