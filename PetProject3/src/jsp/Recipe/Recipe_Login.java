@@ -45,16 +45,16 @@ public class Recipe_Login{
 		//sql문장
 		String sql = "";  
 //		4 select 명령문을 생성 및 실행
-		sql = "select *from Recipe_Login where id='choi111'";
+//		sql = "select *from Recipe_Login where id='choi111'";
 //		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
 		
-		ResultSet result = stmt.executeQuery(sql);
+//		ResultSet result = stmt.executeQuery(sql);
 		
 //		5. update 명령문을 생성 및 실행
-//		sql = "update Recipe_Login set 컬럼 = ? where 컬럼 = ? "
+		sql = "UPDATE Recipe_Login SET 컴럼 = ? WHERE 컬럼 =?";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
-		
+		ResultSet result = stmt.executeQuery(sql);
 //		stmt.setString(1,?);
 //		stmt.setString(2,?);
 //		int result = stmt.executeUpdate();

@@ -46,13 +46,13 @@ public class Recipe{
 		//sql문장
 		String sql = "";  
 //		4 select 명령문을 생성 및 실행
-		sql = "select *from Recipe where r_num=";
+		sql = "select *from Recipe where r_num= 128671";
 //		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
 		ResultSet result = stmt.executeQuery(sql);
 		
 //		5. update 명령문을 생성 및 실행
-//		sql = "update Recipe set 컬럼 = ? where 컬럼 = ? "
+//		sql = "UPDATE Recipe SET 컴럼 = ? WHERE 컬럼 =?";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
 		
 //		stmt.setString(1,?);
@@ -61,12 +61,12 @@ public class Recipe{
 //		System.out.println("Update 결과 : " + result); 
 //		 	
 		if (result.next()) {
-			long r_num = result.getLong("r_num");
+			int r_num = result.getInt("r_num");
 			String r_name = result.getString("r_name");
 			String servings = result.getString("servings");
 			String r_level = result.getString("r_level");
-			long r_time = result.getLong("r_time");
-			long r_recommend = result.getLong("r_recommend");
+			String r_time = result.getString("r_time");
+			int r_recommend = result.getInt("r_recommend");
 			String r_category = result.getString("r_category");
     
 //		데이터 출력

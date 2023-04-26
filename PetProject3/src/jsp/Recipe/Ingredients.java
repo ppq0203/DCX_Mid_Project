@@ -59,7 +59,7 @@ public class Ingredients{
 //		ResultSet result = stmt.executeQuery(sql);
 
 //		5. update 명령문을 생성 및 실행
-//		sql = "update Ingredients set 컬럼 = ? where 컬럼 = ? "
+//		sql = "UPDATE Ingredients SET 컴럼 = ? WHERE 컬럼 =?";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
 //		stmt.setString(1,?);
 //		stmt.setString(2,?);
