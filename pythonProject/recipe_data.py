@@ -30,14 +30,14 @@ df_rep1.loc[:,"CKG_MTRL_CN"].replace(r'배합초\)', '', regex=True, inplace=Tru
 # sorted_d = dict( sorted(res.items(), key=operator.itemgetter(1),reverse=True)) # 아이디별 많은 레시피를 보유중인 아이디를 내림차순으로 정렬
 # print('Dictionary in descending order by value : ',sorted_d) #결과값 출력
 
-my_dict = {"RCP_SNO":[], "ING_NAME":[], "ING_COUNT":[], "ING_UNIT":[]}
+my_dict = {"RCP_SNO":[], "ING_INFO":[]}
 
 temp_list = []
 for (_, df_row) in df_rep1.iterrows():
     # print(i, ": ", df_row["RCP_SNO"], type(df_row["CKG_MTRL_CN"]) )
     df_str = df_row["CKG_MTRL_CN"].split('|')
     for elem in df_str:
-        temp_list.append([df_row["RCP_SNO"], elem, '', ''])
+        temp_list.append([df_row["RCP_SNO"], elem])
         # print(elem, end=", ")
     # print('\n',temp_list)
 
