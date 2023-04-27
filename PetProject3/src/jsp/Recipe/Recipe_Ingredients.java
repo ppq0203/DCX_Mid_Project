@@ -2,6 +2,7 @@ package jsp.Recipe;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,10 +48,10 @@ public class Recipe_Ingredients{
 		String sql = "";  
 		
 //		4. select 명령문을 생성 및 실행
-//		sql = "select *from Recipe_Ingredients where r_num=";
-////		  
+		sql = "select *from Recipe_Ingredients where r_num=";
+//		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
-//		ResultSet result = stmt.executeQuery(sql);
+		ResultSet result = stmt.executeQuery(sql);
 		
 //		5. update 명령문을 생성 및 실행
 //		sql = "UPDATE Recipe_Ingredients SET 컴럼 = ? WHERE 컬럼 =?";
@@ -60,8 +61,8 @@ public class Recipe_Ingredients{
 //		stmt.setString(2,?);
 //		int result = stmt.executeUpdate();
 //		System.out.println("Update 결과 : " + result); 
-		ResultSet result = stmt.executeQuery(sql);
-				
+//		ResultSet result = stmt.executeQuery(sql);
+//				
 		if (result.next()) {
 			long r_num = result.getLong("r_num");
 			long r_quantity = result.getLong("r_quantity");
@@ -74,17 +75,17 @@ public class Recipe_Ingredients{
 		}else {
 			System.out.println("레코드가 존재하지 않습니다.");
 		}  
-//		4-1. 4번을 close
-		result.close();  
+////		4-1. 4번을 close
+//		result.close();  
 		
 //		6. insert 명령문을 생성 및 실행
 //		sql = "insert into Recipe_Ingredients(r_num, r_quantity, r_name)" +
 //			  "values(?,?,?)";
 //		PreparedStatement stmt = con.prepareStatement(sql);
-		
-//		7. 데이터 삽입(레코드세트)
-//		stmt.setLong(1, L);
-//		stmt.setLong(2, L);
+//		
+////		7. 데이터 삽입(레코드세트)
+//		stmt.setInt(1, );
+//		stmt.setInt(2, );
 //		stmt.setString(3, "");
 		
 //		8. 4 or 5 close

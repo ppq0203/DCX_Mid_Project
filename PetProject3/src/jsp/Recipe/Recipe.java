@@ -46,7 +46,7 @@ public class Recipe{
 		//sql문장
 		String sql = "";  
 //		4 select 명령문을 생성 및 실행
-		sql = "select *from Recipe where r_num= 128671";
+		sql = "select *from Recipe where r_num= 221097";
 //		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
 		ResultSet result = stmt.executeQuery(sql);
