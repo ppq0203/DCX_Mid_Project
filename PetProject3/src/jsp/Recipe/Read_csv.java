@@ -14,7 +14,7 @@ public class Read_csv {
         String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
         String username = "c##scott";
         String password = "tiger";
-        String csvFilePath = "C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\table test\\Recipe.csv";
+        String csvFilePath = "C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\table test\\RecipeAll.csv";
         
         Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
             BufferedReader br = new BufferedReader(new FileReader(csvFilePath)); 
@@ -26,6 +26,7 @@ public class Read_csv {
             
             // CSV 파일의 첫 번째 줄은 열 이름으로 제외시킴
             br.readLine();
+            
             
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
