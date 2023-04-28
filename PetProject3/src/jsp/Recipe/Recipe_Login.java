@@ -14,12 +14,12 @@ import java.lang.ClassNotFoundException;
  * 2. 드라이버 관리자 등록
  * 3. 2번을 통해서 접속
  * 4. select 명령문을 생성 및 실행
- * 5. insert 명령문을 생성 및 실행
- * 5-1 데이터 삽입(레코드세트)
- * 6. 4 or 5 close
- * 7. 3번 close
- * 
- * 
+ * 4-1. 4번 resultset close
+ * 5. update 명령문을 생성 및 실행
+ * 6. insert 명령문을 생성 및 실행
+ * 7. 데이터 삽입(레코드세트)
+ * 8. 4 or 5 close
+ * 9. 3번 close
  */
 public class Recipe_Login{
 
@@ -45,12 +45,21 @@ public class Recipe_Login{
 		//sql문장
 		String sql = "";  
 //		4 select 명령문을 생성 및 실행
-		sql = "select *from Recipe_Login where id='choi111'";
+//		sql = "select *from Recipe_Login where id='choi111'";
 //		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
 		
+//		ResultSet result = stmt.executeQuery(sql);
+		
+//		5. update 명령문을 생성 및 실행
+		sql = "UPDATE Recipe_Login SET 컴럼 = ? WHERE 컬럼 =?";
+//		PreparedStatement stmt = con.prepareStatement(sql); 
 		ResultSet result = stmt.executeQuery(sql);
-//		 	
+//		stmt.setString(1,?);
+//		stmt.setString(2,?);
+//		int result = stmt.executeUpdate();
+//	    System.out.println("Update 결과 : " + result);
+		
 		if (result.next()) {
 			String id = result.getString("id");
 			String pw = result.getString("pw");
@@ -61,29 +70,29 @@ public class Recipe_Login{
 //		데이터 출력
 			System.out.println("id: " + id);
 			System.out.println("pw: " + pw);
-			System.out.println("phone: " + phone);
+			System.out.println("phone: " + "0"+phone);
 			System.out.println("address: " + address);
 			System.out.println("email: " + email);
 		}else {
 			System.out.println("레코드가 존재하지 않습니다.");
 		}  
-//		4번을 close
+//		4-1. 4번 resultset close
 		result.close();  
-//		5. insert 명령문을 생성 및 실행
+//		6. insert 명령문을 생성 및 실행
 //		sql = "insert into Recipe_Login(id, pw, phone, address, email)" +
 //				"values(?,?,?,?,?)";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
-//		5-1 데이터 삽입(레코드세트)
-
+		
+//		7. 데이터 삽입(레코드세트)
 //		stmt.setString(1, "");
 //		stmt.setString(2, "");
 //		stmt.setLong(3, );
 //		stmt.setString(4, "");
 //		stmt.setString(5, "");
 		
-//		6. 4 or 5 close
+//		8. 4 or 5 close
 		stmt.close();
-//		7. 3번 close
+//		9. 3번 close
 		con.close();
 		 
 }}
