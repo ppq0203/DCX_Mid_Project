@@ -22,16 +22,21 @@ for (_, df_row) in df.iterrows():
     print(konl_kkma)
     name = []
     amount = []
-    unit = []
+    temp = []
     for (str_, kind) in konl_kkma:
         if kind == "NR" or kind == "SP":
+            amount += temp
+            temp = []
             amount.append(str_)
         elif len(amount) == 0:
             name.append(str_)
         else:
-            unit.append(str_)
-    temp_list.append([df_row["RCP_SNO"], "".join(name), "".join(amount), "".join(unit)])
+            temp.append(str_)
+    if len(amount) > 0:
+        temp_list.append([df_row["RCP_SNO"], df_row['ING_INFO'].split(amount[0])[0], "".join(amount), df_row['ING_INFO'].split(amount[-1])[-1]])
+    else:
+        temp_list.append([df_row["RCP_SNO"], df_row['ING_INFO'], "", ""])
 
 my_df = pd.DataFrame(data=temp_list, columns=my_dict)
 
-my_df.to_csv("csv_file/RECIPE_BEFORE_Filter_Have.csv", index=False, encoding='ms949')
+my_df.to_csv("csv_file/RECIPE_BEFORE_Filter_Have2.csv", index=False, encoding='ms949')
