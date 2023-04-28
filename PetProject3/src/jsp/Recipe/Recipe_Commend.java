@@ -34,14 +34,24 @@ public class Recipe_Commend {
 		// 추천 레시피를 위한 쿼리문 생성
 		String ingredientStr = String.join("', '", ingredientsList);
 		
-		sql = "SELECT r.r_name, r.r_category, r.r_time " +
-		      "FROM Recipe r " +
-		      "INNER JOIN Recipe_Ingredients ri ON r.r_num = ri.r_num " +
-		      "INNER JOIN Ingredients i ON ri.r_name = i.i_name " +
-		      "WHERE i.i_name IN ('" + ingredientStr + "') " +
-		      "GROUP BY r.r_name, r.r_category, r.r_time " +
-		      "HAVING COUNT(*) >= 3" +
-		      "ORDER BY r.r_time ASC";
+//		sql = "SELECT r.r_name, r.r_category, r.r_time " +
+//		      "FROM Recipe r " +
+//		      "INNER JOIN Recipe_Ingredients ri ON r.r_num = ri.r_num " +
+//		      "INNER JOIN Ingredients i ON ri.r_name = i.i_name " +
+//		      "WHERE i.i_name IN ('" + ingredientStr + "') " +
+//		      "GROUP BY r.r_name, r.r_category, r.r_time " +
+//		      "HAVING COUNT(*) >= 3" +
+//		      "ORDER BY r.r_time ASC";
+		sql = "SELECT r.r_name, r.r_category, r.r_time, im.image_name, im.image_url " +
+			      "FROM Recipe r " +
+			      "INNER JOIN Recipe_Ingredients ri ON r.r_num = ri.r_num " +
+			      "INNER JOIN Ingredients i ON ri.r_name = i.i_name " +
+			      "INNER JOIN Ingredients_Img im ON i.i_name = im.i_name " +
+			      "WHERE i.i_name IN ('" + ingredientStr + "') " +
+			      "GROUP BY r.r_name, r.r_category, r.r_time, im.image_name, im.image_url " +
+			      "HAVING COUNT(*) >= 3 " +
+			      "ORDER BY r.r_time ASC";
+//				
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(sql);
 		
@@ -50,9 +60,13 @@ public class Recipe_Commend {
 			String r_name = rs.getString("r_name");
 			String r_category = rs.getString("r_category");
 			String r_time = rs.getString("r_time");
+			String image_name = rs.getString("image_name");
+			String image_url = rs.getString("image_url");
 			System.out.println("레시피 이름: " + r_name);
 			System.out.println("종류: " + r_category);
 			System.out.println("조리시간: " + r_time);
+			System.out.println("재료이름: " + image_name);
+			System.out.println("재료url: " + image_url);
 		}
 
 		rs.close();
