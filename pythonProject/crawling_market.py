@@ -17,8 +17,8 @@ import time
 # 2. Driver & BeautifulSoup
 # driver = webdriver.Chrome(ChromeDriverManager().install()) # 설치가 안되어 있을 경우
 driver = webdriver.Chrome()
-# search = input()
-crawling_url = "https://www.ssg.com/search.ssg?target=all&query=%EB%94%B8%EA%B8%B0kg" # " + search + "
+search = input()
+crawling_url = "https://www.ssg.com/search.ssg?target=all&query=" + search + "kg"
 driver.get(crawling_url)
 
 # 3. Parsing html code
@@ -27,12 +27,17 @@ soup = BeautifulSoup(full_html, 'html.parser')  # DOM parser (mobile SAX parser 
 
 time.sleep(3)
 
-# elements = driver.find_element(By.XPATH, '//*[@id="item_unit_1000045118991"]/div[2]/div[3]/div[1]/em')
-elements = driver.find_element(By.CLASS_NAME, '.cunit_t232')
-# print(elements.get_attribute('innerHTML'))
+list = driver.find_element(By.CLASS_NAME, 'cunit_thmb_lst.cunit_thmb_lst4.cunit_thmb_w1000')  # <ul>
+elements = list.find_element(By.CLASS_NAME, 'cunit_t232')  # 한 항목 <li>
+title = elements.find_element(By.CLASS_NAME, 'title')  # <li> 안 이름 정보 class clickable
+titleNa = title.find_element(By.CLASS_NAME, 'clickable')
+name = titleNa.find_element(By.CLASS_NAME, 'tx_ko')  # 이름 class 안 내용
+print(name.text)
+marketDiv = elements.find_element(By.CLASS_NAME, 'cunit_price')  # <li> 안 가격 정보 class
+price = marketDiv.find_element(By.CLASS_NAME, 'ssg_price')  # 가격 class 안 금액
+print(price.text)
 
-# tr = []
-# tr = driver.find_element(By.TAG_NAME, "tr")
-# td_text = tr.get_attribute('td')
-# tr[-3] = -3번째 td
-# data = pd.DataFrame([tr[-3]])
+# nameList = []
+# priceList = []
+# nameList.append(name)
+# priceList.append(price)
