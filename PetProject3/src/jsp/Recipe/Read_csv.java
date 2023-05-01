@@ -30,7 +30,7 @@ public class Read_csv {
             
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                pstmt.setInt(1, Integer.parseInt(values[0]));
+                pstmt.setString(1, values[0]);
                 pstmt.setString(2, values[1]);
                 pstmt.setString(3, values[2]);
                 pstmt.setString(4, values[3]);

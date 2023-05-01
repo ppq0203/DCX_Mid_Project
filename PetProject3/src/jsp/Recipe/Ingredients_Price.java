@@ -6,9 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.ClassNotFoundException;
 /*
- * 자바 - 오라클데이터베이스 연동 프로그램
+  자바 - 오라클데이터베이스 연동 프로그램
  * JDBC F/W사용
  * 1. driver 로딩
  * 2. 드라이버 관리자 등록
@@ -22,11 +28,10 @@ import java.lang.ClassNotFoundException;
  * 9. 3번 close
  * 
  */
-public class Recipe_Ingredients{
+public class Ingredients_Price{
 
-	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 		
-//				
 //		  자바 - 오라클데이터베이스 연동 프로그램
 //		  JDBC F/W사용
 //		  1. driver 로딩 --> CLASSPATH에서 찾는다.
@@ -46,56 +51,55 @@ public class Recipe_Ingredients{
 		Connection con = DriverManager.getConnection(url, user, password);
 		//sql문장
 		String sql = "";  
-		
-//		4. select 명령문을 생성 및 실행
-		sql = "select *from Recipe_Ingredients where r_num=";
-//		  
-		Statement stmt = con.createStatement(); //web의 session같은 존재
-		ResultSet result = stmt.executeQuery(sql);
-		
-//		5. update 명령문을 생성 및 실행
-//		sql = "UPDATE Recipe_Ingredients SET 컴럼 = ? WHERE 컬럼 =?";
-//		PreparedStatement stmt = con.prepareStatement(sql); 
-		
-//		stmt.setString(1,?);
-//		stmt.setString(2,?);
-//		int result = stmt.executeUpdate();
-//		System.out.println("Update 결과 : " + result); 
-//		ResultSet result = stmt.executeQuery(sql);
-//				
-		if (result.next()) {
-			String r_num = result.getString("r_num");
-			long r_quantity = result.getLong("r_quantity");
-			String r_name = result.getString("r_name");
-
-//		데이터 출력
-			System.out.println("r_num: " + r_num);
-			System.out.println("r_quantity: " + r_quantity);
-			System.out.println("r_name: " + r_name);
-		}else {
-			System.out.println("레코드가 존재하지 않습니다.");
-		}  
-////		4-1. 4번을 close
-//		result.close();  
-		
-//		6. insert 명령문을 생성 및 실행
-//		sql = "insert into Recipe_Ingredients(r_num, r_quantity, r_name)" +
-//			  "values(?,?,?)";
-//		PreparedStatement stmt = con.prepareStatement(sql);
+//		4 select 명령문을 생성 및 실행
+//		sql = "select *from Ingredients_Price where i_name='식재료이름'";
+////		  
+//		Statement stmt = con.createStatement(); //web의 session같은 존재
 //		
-////		7. 데이터 삽입(레코드세트)
-//		stmt.setString(1, "");
-//		stmt.setInt(2, );
-//		stmt.setString(3, "");
+//		ResultSet result = stmt.executeQuery(sql);
+
+//		5. update 명령문을 생성 및 실행
+//		sql = "UPDATE Ingredients_Price SET i_name = ? WHERE i_price =?";
+//		PreparedStatement stmt = con.prepareStatement(sql); 
+//		stmt.setString(1,?);
+//		stmt.setInt(2,?);
+//		int result = stmt.executeUpdate();
+//	    System.out.println("Update 결과 : " + result); 
 		
+//		if (result.next()) {
+//			
+//			String i_name = result.getString("i_name");			
+//			Int i_price = result.getInt("i_price");
+//			
+//			
+//
+////		데이터 출력
+//			System.out.println("i_name: " + i_name);
+//			System.out.println("i_price: " + i_price);
+//		}else {
+//			System.out.println("레코드가 존재하지 않습니다.");
+//			} 
+//			
+//		  
+////		4-1. 4번 resultset close
+//		result.close();  
+
+//		6. insert 명령문을 생성 및 실행
+		sql = "insert into Ingredients_Price(i_name, i_price)" +
+			  "values(?,?)";
+		PreparedStatement stmt = con.prepareStatement(sql); 
+				
+//		7 데이터 삽입(레코드세트)
+		stmt.setString(1, "");
+		stmt.setInt(2, 2000);
+		
+						
 //		8. 4 or 5 close
 		stmt.close();
+		
 //		9. 3번 close
 		con.close();
-	
-		}}
-	
-
-	
+		 
+}}
 
 	
