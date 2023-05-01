@@ -26,7 +26,7 @@ def crawl(item_code,date):
     resp = requests.get(url_api)
     data = resp.json()
     print(data)
-    print(data['data']['item'])
+    # print(data['data']['item'])
     df_data = pd.DataFrame(data['data']['item'])
     print(df_data)
     df_data.to_csv("csv_file/price_"+item_code+"_v1.csv", encoding="ms949")
@@ -42,6 +42,7 @@ print(date)
 
 # item_code 별 원본 csv
 item_code = [str(100), str(200), str(300), str(400), str(500), str(600)]
+print(item_code)
 
 # item_code 별 처리
 list = [code100, code200, code300, code400, code500, code600]
