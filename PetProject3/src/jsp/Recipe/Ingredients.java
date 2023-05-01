@@ -1,6 +1,7 @@
 package jsp.Recipe;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ClassNotFoundException;
+
+import jsp.Recipe.IngredientDAO;
 /*
   자바 - 오라클데이터베이스 연동 프로그램
  * JDBC F/W사용
@@ -24,9 +27,10 @@ import java.lang.ClassNotFoundException;
  * 5. update 명령문을 생성 및 실행
  * 6. insert 명령문을 생성 및 실행
  * 7. 데이터 삽입(레코드세트)
- * 8. 4 or 5 close
- * 9. 3번 close
- * 
+ * 8. delete 명령문을 생성 및 실행
+ * 8-1. 데이터 삽입
+ * 9. 4 or 5 close
+ * 10. 3번 close
  */
 public class Ingredients{
 
@@ -36,36 +40,36 @@ public class Ingredients{
 //		  JDBC F/W사용
 //		  1. driver 로딩 --> CLASSPATH에서 찾는다.
 //		ex)oracle DB 연결시
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-//		ex)mysql DB 연결실
-//		Class.forName("com.mysql.jdbc.Driver");
-//		  2. 드라이버 관리자 등록
-//		  1번을 할 경우 자동 등록
-//		  3. 2번을 통해서 접속
-		 String url = "";
-		 url = "jdbc:oracle:thin:@localhost:1521:XE";
-		  
-//		  url = "jdbc:mysql://localhost:3306/DBNAME?characterEncoding=utf8&autoReconnect=true";
-		String user = "c##scott";
-		String password = "tiger";
-		Connection con = DriverManager.getConnection(url, user, password);
-		//sql문장
-		String sql = "";  
-//		4 select 명령문을 생성 및 실행
-//		sql = "select *from Ingredients where id='choi111'";
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//////		ex)mysql DB 연결실
+////		Class.forName("com.mysql.jdbc.Driver");
+//////		  2. 드라이버 관리자 등록
+//////		  1번을 할 경우 자동 등록
+//////		  3. 2번을 통해서 접속
+//		 String url = "";
+//		 url = "jdbc:oracle:thin:@localhost:1521:XE";
 ////		  
+////		  url = "jdbc:mysql://localhost:3306/DBNAME?characterEncoding=utf8&autoReconnect=true";
+//		String user = "c##scott";
+//		String password = "tiger";
+//		Connection con = DriverManager.getConnection(url, user, password);
+////		//sql문장
+//		String sql = "";  
+////		4 select 명령문을 생성 및 실행
+//		sql = "select *from Ingredients where id='choi123'";
+//		  
 //		Statement stmt = con.createStatement(); //web의 session같은 존재
 //		
 //		ResultSet result = stmt.executeQuery(sql);
-
-//		5. update 명령문을 생성 및 실행
-//		sql = "UPDATE Ingredients SET 컴럼 = ? WHERE 컬럼 =?";
+////
+//////		5. update 명령문을 생성 및 실행
+//		sql = "UPDATE Ingredients SET i_name = ? WHERE id =?";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
-//		stmt.setString(1,?);
-//		stmt.setString(2,?);
+//		stmt.setString(1,"오이");
+//		stmt.setString(2,"choi123");
 //		int result = stmt.executeUpdate();
 //	    System.out.println("Update 결과 : " + result); 
-		
+////		
 //		if (result.next()) {
 //			
 //			String id = result.getString("id");			
@@ -80,27 +84,56 @@ public class Ingredients{
 //		}else {
 //			System.out.println("레코드가 존재하지 않습니다.");
 //			} 
-//			
-//		  
-////		4-1. 4번 resultset close
-//		result.close();  
-
-//		6. insert 명령문을 생성 및 실행
-		sql = "insert into Ingredients(id, i_name, i_quantity)" +
-			  "values(?,?,?)";
-		PreparedStatement stmt = con.prepareStatement(sql); 
-				
-//		7 데이터 삽입(레코드세트)
-		stmt.setString(1, "choi111");
-		stmt.setString(2, "배추");
-		stmt.setLong(3, 1L);
-						
-//		8. 4 or 5 close
-		stmt.close();
+////			
+////		  
+//////		4-1. 4번 resultset close
+////		result.close();  
+//
+////		6. insert 명령문을 생성 및 실행
+////		sql = "insert into Ingredients(id, i_name, i_quantity)" +
+////			  "values(?,?,?)";
+////		PreparedStatement stmt = con.prepareStatement(sql); 
+////				
+//////		7 데이터 삽입(레코드세트)
+////		stmt.setString(1, "choi111");
+////		stmt.setString(2, "배추");
+////		stmt.setLong(3, 1L);
+////		
+////		8. delete 명령문을 생성 및 실행
+////		String i_name = "";
+////		sql = "delete from Ingredients where id = ? and i_name=?";
+////		PreparedStatement stmt = con.prepareStatement(sql);	
+////		
+//////		8-1. 데이터 삽입
+////		stmt.setString(1, "");
+////		stmt.setString(2, "");
+////		
+////		int rows = stmt.executeUpdate();
+////		//결과 출력
+////		if (rows == 1) {
+////            System.out.println(i_name + " 재료가 삭제되었습니다.");
+////        } else {
+////            System.out.println(i_name + " 재료가 존재하지 않습니다.");
+////        }
+////		9. 4 or 5 close
+//		stmt.close();
+//		
+////		10. 3번 close
+//		con.close();
 		
-//		9. 3번 close
-		con.close();
-		 
-}}
+		
+//		IngredientDAO i_dao = new IngredientDAO();
+////		Ingredient result = i_dao.selectIngredient("choi123");
+////		if (result != null) {
+////		    System.out.println("ID: " + result.getId());
+////		    System.out.println("이름: " + result.getI_name());
+////		    System.out.println("수량: " + result.getI_quantity());
+////		}
+		IngredientDAO i_dao = new IngredientDAO();
+//		i_dao.insertIngredient("asdfasf", "대파", 2);
+//		i_dao.updateIngredient("dkqydhd", "양파");
+		i_dao.deleteIngredient("dkqydhd", "계란");
+		
+	}}
 
 	

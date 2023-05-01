@@ -77,19 +77,12 @@
                     <td id="title">비밀번호</td>
                     <td>
                         <input type="password" name="password" maxlength="50" 
-                            value="<%=mb.getPassword()%>">
+                            value="<%=mb.getPw()%>">
                     </td>
                 </tr>
             </table>    
             <br><br>    
-            <table>
- 
-                <tr>
-                    <td id="title">이름</td>
-                    <td><input type="text" name="name" size = "50" maxlength="50" 
-                            value="<%=mb.getName()%> "></td>
-                </tr>
-                          
+                                   
                 <tr>
                     <td id="title">이메일</td>
                     <td>

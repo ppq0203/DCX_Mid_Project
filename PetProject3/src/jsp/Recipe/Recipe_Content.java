@@ -2,6 +2,7 @@ package jsp.Recipe;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,11 +22,11 @@ import java.lang.ClassNotFoundException;
  * 9. 3번 close
  * 
  */
-public class Recipe{
+public class Recipe_Content{
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		
-//			
+//				
 //		  자바 - 오라클데이터베이스 연동 프로그램
 //		  JDBC F/W사용
 //		  1. driver 로딩 --> CLASSPATH에서 찾는다.
@@ -45,65 +46,53 @@ public class Recipe{
 		Connection con = DriverManager.getConnection(url, user, password);
 		//sql문장
 		String sql = "";  
-//		4 select 명령문을 생성 및 실행
-		sql = "select *from Recipe where r_num= 221097";
+		
+//		4. select 명령문을 생성 및 실행
+		sql = "select *from Recipe_Content where r_num=";
 //		  
 		Statement stmt = con.createStatement(); //web의 session같은 존재
 		ResultSet result = stmt.executeQuery(sql);
 		
 //		5. update 명령문을 생성 및 실행
-//		sql = "UPDATE Recipe SET 컴럼 = ? WHERE 컬럼 =?";
+//		sql = "UPDATE Recipe_Content SET 컴럼 = ? WHERE 컬럼 =?";
 //		PreparedStatement stmt = con.prepareStatement(sql); 
 		
 //		stmt.setString(1,?);
 //		stmt.setString(2,?);
 //		int result = stmt.executeUpdate();
 //		System.out.println("Update 결과 : " + result); 
-//		 	
+//		ResultSet result = stmt.executeQuery(sql);
+//				
 		if (result.next()) {
 			String r_num = result.getString("r_num");
 			String r_name = result.getString("r_name");
-			String servings = result.getString("servings");
-			String r_level = result.getString("r_level");
-			String r_time = result.getString("r_time");
-			int r_recommend = result.getInt("r_recommend");
-			String r_category = result.getString("r_category");
-    
+
 //		데이터 출력
 			System.out.println("r_num: " + r_num);
 			System.out.println("r_name: " + r_name);
-			System.out.println("servings: " + servings);
-			System.out.println("r_level: " + r_level);
-			System.out.println("r_time: " + r_time);
-			System.out.println("r_recommend: " + r_recommend);
-			System.out.println("r_category: " + r_category);
 		}else {
 			System.out.println("레코드가 존재하지 않습니다.");
 		}  
-//		4-1. 4번 resultset close
-		result.close();  
+////		4-1. 4번을 close
+//		result.close();  
 		
 //		6. insert 명령문을 생성 및 실행
-//		sql = "insert into Recipe(r_num, r_name, servings, r_level, r_time,r_recommend, r_category)" +
-//			  "values(?,?,?,?,?,?,?)";
-//		PreparedStatement stmt = con.prepareStatement(sql); 
-			
-//		7. 데이터 삽입(레코드세트)
+//		sql = "insert into Recipe_Content(r_num, r_name)" +
+//			  "values(?,?)";
+//		PreparedStatement stmt = con.prepareStatement(sql);
+//		
+////		7. 데이터 삽입(레코드세트)
 //		stmt.setString(1, "");
 //		stmt.setString(2, "");
-//		stmt.setString(3, "");
-//		stmt.setString(4, "");
-//		stmt.setLong(5, L);
-//		stmt.setLong(6, L);
-//		stmt.setString(7, "");
-	 	 
+//		
+		
 //		8. 4 or 5 close
 		stmt.close();
 //		9. 3번 close
-		con.close();	
-		 
-	}}
-
+		con.close();
+	
+		}}
+	
 
 	
 

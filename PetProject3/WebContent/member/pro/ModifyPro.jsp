@@ -32,7 +32,7 @@ function goLogForm() {
     		
     	
         memberBean.setId(id);
-        memberBean.setPassword(pwd);        
+        memberBean.setPw(pwd);        
         memberBean.setMail1(mail1);
         memberBean.setMail2(mail2);
         memberBean.setPhone(phone);

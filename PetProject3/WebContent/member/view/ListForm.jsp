@@ -44,8 +44,7 @@
 	 	<tr>
 	 	<td><a href="UserInfo.jsp?id=<%=mb.getId() %>">
 	 	<%=mb.getId() %></a></td>
-	 	<td><%=mb.getPassword()%></td>
-	 	<td><%=mb.getName() %></td>
+	 	<td><%=mb.getPw()%></td>
 	 	<td><%=mb.getMail1()%>@<%=mb.getMail2()%></td>
 	 	</tr>
 	<%} %>

@@ -55,12 +55,6 @@
                 <td id="title">아이디</td>
                 <td><%=mb.getId()%></td>
             </tr>
-                 
-                       
-            <tr>
-                <td id="title">이름</td>
-                <td><%=mb.getName() %></td>
-            </tr>
                       
             <tr>
                 <td id="title">이메일</td>
