@@ -53,6 +53,9 @@ def print_info(length, name, data):
     weight = calc_weight(quantity, name, data)
     print("{} 무게: {:.1f}".format(name, weight))
 
+'''21개 list
+감자, 양파, 대파, 고추, 계란, 배추, 무, 당근, 마늘, 고구마, 상추, 오이
+토마토, 고춧가루, 버섯, 앞다리, 삼겹살, 갈비, 목심, 고등어, 갈치'''
 
 # 사용할 엑셀 파일 이름
 filename = "21type.xlsx"
