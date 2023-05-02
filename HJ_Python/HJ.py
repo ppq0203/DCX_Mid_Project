@@ -5,10 +5,10 @@ import pandas as pd
 def read_21type(filename):
     df = pd.read_excel(filename, engine='openpyxl')
     df['길이cm (1개 기준)'] = df['길이cm (1개 기준)'].str.extract(r'(\d+)').astype(float)
-    df['무게 kg (1개 기준)'] = df['무게 kg (1개 기준)'].str.extract(r'(\d+\.\d+)').astype(float)
+    df['무게 g (1개 기준)'] = df['무게 g (1개 기준)'].str.extract(r'(\d+)').astype(float)
 
     type_lengths = df['길이cm (1개 기준)']
-    type_weights = df['무게 kg (1개 기준)']
+    type_weights = df['무게 g (1개 기준)']
 
     result = {}
     index = 0
