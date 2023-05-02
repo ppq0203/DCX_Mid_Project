@@ -1,8 +1,20 @@
 package jsp.Recipe;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class IngredientDAO {
     private Connection conn = null;
@@ -23,16 +35,18 @@ public class IngredientDAO {
         }
     }
 
-    public void insertIngredient(String id, String i_name, int i_quantity) {
-        String sql = "insert into Ingredients(id, i_name, i_quantity)values(?,?,?)";
+    public void insertIngredient(String id, String ING_NAME, Float ING_AMOUNT,String ING_UNIT ) {
+        String sql = "insert into Ingredients(id, ING_NAME, ING_AMOUNT,ING_UNIT)values(?,?,?,?)";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
-            pstmt.setString(2, i_name);
-            pstmt.setInt(3, i_quantity);
+            pstmt.setString(2, ING_NAME);
+            pstmt.setFloat(3, ING_AMOUNT);
+            pstmt.setString(4, ING_UNIT);
             
-
+            
             pstmt.executeUpdate();
+            System.out.println("1행이 입력되었습니다.");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -40,12 +54,12 @@ public class IngredientDAO {
         }
     }
     
-    public void insertImg(String i_name, String color, Float length, Float weight, String image_name, String image_url) {
+    public void insertImg(String ING_NAME , String color, Float length, Float weight, String image_name, String image_url) {
     
-    String sql = "insert into Ingredients_img(i_name, color, length, weight, image_name, image_url)values(?,?,?,?,?,?)";
+    String sql = "insert into Ingredients_img(ING_NAME , color, length, weight, image_name, image_url)values(?,?,?,?,?,?)";
     try {
     	pstmt = conn.prepareStatement(sql);
-    	pstmt.setString(1, i_name);
+    	pstmt.setString(1, ING_NAME );
 		pstmt.setString(2, color );
 		pstmt.setFloat(3, length);
 		pstmt.setFloat(4, weight);
@@ -54,21 +68,97 @@ public class IngredientDAO {
         
 
         pstmt.executeUpdate();
+        System.out.println("1행이 입력되었습니다.");
     } catch (SQLException e) {
         e.printStackTrace();
     } finally {
         close();
     }
 }
+    public void insertRecipe(String RCP_SNO, String CKG_NM, String CKG_KND_ACTO_NM, String CKG_INBUN_NM, String CKG_DODF_NM, String CKG_TIME_NM, int RCMM_CNT) {
+        
+        String sql = "insert into Recipe(RCP_SNO, CKG_NM, CKG_KND_ACTO_NM, CKG_INBUN_NM, CKG_DODF_NM,CKG_TIME_NM, RCMM_CNT)values(?,?,?,?,?,?,?)";
+        try {
+        	pstmt = conn.prepareStatement(sql);
+        	pstmt.setString(1, RCP_SNO);
+    		pstmt.setString(2, CKG_NM );
+    		pstmt.setString(3, CKG_KND_ACTO_NM);
+    		pstmt.setString(4, CKG_INBUN_NM);
+    		pstmt.setString(5, CKG_DODF_NM);
+            pstmt.setString(6, CKG_TIME_NM);
+            pstmt.setInt(7, RCMM_CNT);
+            pstmt.executeUpdate();
+            System.out.println("1행이 입력되었습니다.");
+        }	 
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+public void insertContent(String RCP_SNO, String SRAP_CNT , String ING_INFO) {
+        
+        String sql = "insert into Recipe_content(RCP_SNO, SRAP_CNT, ING_INFO)values(?,?,?)";
+        try {
+        	pstmt = conn.prepareStatement(sql);
+        	pstmt.setString(1, RCP_SNO);
+    		pstmt.setString(2, SRAP_CNT );
+    		pstmt.setString(3, ING_INFO);
+
+            pstmt.executeUpdate();
+            System.out.println("1행이 입력되었습니다.");
+        }	 
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+public void insertRIngredient(String RCP_SNO, String ING_NAME, Float ING_AMOUNT,String ING_UNIT) {
     
-    public void deleteIngredient(String id, String i_name) {
-        String sql = "DELETE FROM ingredients WHERE id=? and i_name=?";
+    String sql = "insert into Recipe_Ingredients(RCP_SNO, ING_NAME, ING_AMOUNT)values(?,?,?,?)";
+    try {
+    	pstmt = conn.prepareStatement(sql);
+    	pstmt.setString(1, RCP_SNO);
+		pstmt.setString(2, ING_NAME);
+		pstmt.setFloat(3, ING_AMOUNT);
+		pstmt.setString(4, ING_UNIT);
+
+        pstmt.executeUpdate();
+        System.out.println("1행이 입력되었습니다.");
+    }	 
+    catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close();
+    }
+}
+public void insertPrice(String ING_NAME, int i_price) {
+    
+    String sql = "insert into Ingredients_Price(ING_NAME, i_price)values(?,?)";
+    try {
+    	pstmt = conn.prepareStatement(sql);
+    	pstmt.setString(1, ING_NAME);
+		pstmt.setInt(2, i_price);
+
+        pstmt.executeUpdate();
+        System.out.println("1행이 입력되었습니다.");
+    }	 
+    catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close();
+    }
+}
+    public void deleteIngredient(String id, String ING_NAME) {
+        String sql = "DELETE FROM ingredients WHERE id=? and ING_NAME=?";
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
-            pstmt.setString(2, i_name);
+            pstmt.setString(2, ING_NAME);
 
             pstmt.executeUpdate();
+            System.out.println("1행이 삭제되었습니다.");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -76,11 +166,12 @@ public class IngredientDAO {
         }
     }
 
-    public void updateIngredient(String id, String i_name) {
-        String sql = "UPDATE Ingredients SET i_name = ? WHERE id = ?";
+    public void updateIngredient(String ING_NAME, String id) {
+    	String sql = "";
+        sql = "UPDATE Ingredients SET ING_NAME = ? WHERE id = ?";
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, i_name);
+            pstmt.setString(1, ING_NAME);
             pstmt.setString(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected == 0) {
@@ -95,44 +186,41 @@ public class IngredientDAO {
             close();
         }
     }
-
-public List<Ingredient> selectAllIngredients() {
-    String sql = "SELECT * FROM Ingredients";
-    List<Ingredient> ingredients = new ArrayList<>();
-    try {
-        pstmt = conn.prepareStatement(sql);
-        rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            Ingredient ingredient = new Ingredient();
-            ingredient.setId(rs.getString("id"));
-            ingredient.setI_name(rs.getString("i_name"));
-            ingredient.setI_quantity(rs.getInt("i_quantity"));
-
-            ingredients.add(ingredient);
+    
+    public void updatePrice(String ING_NAME, int i_price) {
+    	String sql = "";
+        sql = "UPDATE Ingredients SET i_price = ? WHERE ING_NAME = ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, i_price);
+            pstmt.setString(2, ING_NAME);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("해당하는 식재료가 없습니다.");
+            } else {
+                System.out.println(rowsAffected + "개의 행이 수정되었습니다.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+        	
+            close();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        close();
     }
-
-    return ingredients;
-}
-
-public Ingredient selectIngredient(String id) {
+public RecipeDTO selectIngredient(String id) {
     String sql = "SELECT * FROM Ingredients WHERE id=?";
-    Ingredient ingredient = null;
+    RecipeDTO ingredient = null;
     try {
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, id);
         rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            ingredient = new Ingredient();
+            ingredient = new RecipeDTO();
             ingredient.setId(rs.getString("id"));
-            ingredient.setI_name(rs.getString("i_name"));
-            ingredient.setI_quantity(rs.getInt("i_quantity"));
+            ingredient.setING_NAME(rs.getString("ING_NAME"));
+            ingredient.setING_AMOUNT(rs.getFloat("ING_AMOUNT"));
+            ingredient.setING_UNIT(rs.getString("ING_UNIT"));
         } else {
             System.out.println("해당하는 식재료가 없습니다.");
         }
@@ -145,8 +233,214 @@ public Ingredient selectIngredient(String id) {
     return ingredient;
     
 }
+public RecipeDTO selectRecipe(String RCP_SNO) {
+    String sql = "SELECT * FROM Recipe WHERE RCP_SNO=?";
+    RecipeDTO ingredient = null;
+    try {
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, RCP_SNO);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            ingredient = new RecipeDTO();
+            ingredient.setRCP_SNO(rs.getString("RCP_SNO"));
+            ingredient.setCKG_NM(rs.getString("CKG_NM"));
+            ingredient.setCKG_KND_ACTO_NM(rs.getString("CKG_KND_ACTO_NM"));
+            ingredient.setCKG_INBUN_NM(rs.getString("CKG_INBUN_NM"));
+            ingredient.setCKG_DODF_NM(rs.getString("CKG_DODF_NM"));
+            ingredient.setCKG_TIME_NM(rs.getString("CKG_TIME_NM"));
+            ingredient.setRCMM_CNT(rs.getInt("RCMM_CNT"));
+        } else {
+            System.out.println("해당하는 레시피정보가 없습니다.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close();
+    }
+
+    return ingredient;
+    
+}	
+public RecipeDTO selectRecipe_Ingredient(String RCP_SNO) {
+    String sql = "SELECT * FROM Recipe_Ingredients WHERE RCP_SNO=?";
+    RecipeDTO ingredient = null;
+    try {
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, RCP_SNO);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            ingredient = new RecipeDTO();
+            ingredient.setRCP_SNO(rs.getString("RCP_SNO"));
+            ingredient.setING_NAME(rs.getString("ING_NAME"));
+            ingredient.setING_AMOUNT(rs.getFloat("ING_AMOUNT"));
+            ingredient.setING_UNIT(rs.getString("ING_UNIT"));
+        } else {
+            System.out.println("해당하는 레코드가 없습니다.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close();
+    }
+
+    return ingredient;
+    
+}
+public RecipeDTO select_Content(String RCP_SNO) {
+    String sql = "SELECT * FROM Recipe_Content WHERE RCP_SNO=?";
+    RecipeDTO ingredient = null;
+    try {
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, RCP_SNO);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            ingredient = new RecipeDTO();
+            ingredient.setRCP_SNO(rs.getString("RCP_SNO"));
+            ingredient.setSRAP_CNT(rs.getString("SRAP_CNT"));
+            ingredient.setING_INFO(rs.getString("ING_INFO"));
+        } else {
+            System.out.println("해당하는 레코드가 없습니다.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close();
+    }
+
+    return ingredient;
+    
+}
+public RecipeDTO select_Price(String ING_NAME) {
+    String sql = "SELECT * FROM Ingredients_Price WHERE ING_NAME=?";
+    RecipeDTO ingredient = null;
+    try {
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, ING_NAME);
+        rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            ingredient = new RecipeDTO();
+            ingredient.setING_NAME(rs.getString("ING_NAME"));
+            ingredient.setI_price(rs.getInt("i_price"));
+        } else {
+            System.out.println("해당하는 레코드가 없습니다.");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        close();
+    }
+
+    return ingredient;
+    
+}
+public void CSV_Recipe(String csvFilePath) throws SQLException, NumberFormatException, IOException {
+	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFilePath), "EUC-KR")); 
+    
+    String line;
+    String tableName = "Recipe";
+    String insertSql = "INSERT INTO " + tableName + " (RCP_SNO, CKG_NM, CKG_KND_ACTO_NM, CKG_INBUN_NM, CKG_DODF_NM,CKG_TIME_NM, RCMM_CNT) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    PreparedStatement pstmt = conn.prepareStatement(insertSql);
+    
+    // CSV 파일의 첫 번째 줄은 열 이름으로 제외시킴
+    br.readLine();
+    
+    
+    while ((line = br.readLine()) != null) {
+        String[] values = line.split(",");
+        pstmt.setString(1, values[0]);
+        pstmt.setString(2, values[1]);
+        pstmt.setString(3, values[2]);
+        pstmt.setString(4, values[3]);
+        pstmt.setString(5, values[4]);
+        pstmt.setString(6, values[5]);
+        pstmt.setInt(7, Integer.parseInt(values[6]));
+        
+        pstmt.executeUpdate();
+    }
+    
+    System.out.println("CSV file has been imported into the database.");
     
 
+}
+public void CSV_Recipe_Ingredients(String csvFilePath) throws SQLException, NumberFormatException, IOException {
+	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFilePath), "EUC-KR")); 
+    
+    String line;
+    String tableName = "Recipe_Ingredients";
+    String insertSql = "INSERT INTO " + tableName + " (RCP_SNO, ING_NAME, ING_AMOUNT, ING_UNIT) values (?,?,?,?)";
+    PreparedStatement pstmt = conn.prepareStatement(insertSql);
+    
+    // CSV 파일의 첫 번째 줄은 열 이름으로 제외시킴
+    br.readLine();
+    
+    
+    while ((line = br.readLine()) != null) {
+        String[] values = line.split(",");
+        pstmt.setString(1, values[0]);
+        pstmt.setString(2, values[1]);
+        pstmt.setFloat(3, Float.parseFloat(values[2]));
+        pstmt.setString(4, values[3]);
+        
+        pstmt.executeUpdate();
+    }
+    
+    System.out.println("CSV file has been imported into the database.");
+    
+
+}
+public void CSV_Recipe_Content(String csvFilePath) throws SQLException, NumberFormatException, IOException {
+	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFilePath), "EUC-KR"));  
+    
+    String line;
+    String tableName = "Recipe_Content";
+    String insertSql = "INSERT INTO " + tableName + " (RCP_SNO, SRAP_CNT, ING_INFO) values (?,?,?)";
+    PreparedStatement pstmt = conn.prepareStatement(insertSql);
+    
+    // CSV 파일의 첫 번째 줄은 열 이름으로 제외시킴
+    br.readLine();
+    
+    
+    while ((line = br.readLine()) != null) {
+    	
+        String[] values = line.split(",");
+        if(values.length>=3) {
+        pstmt.setString(1, values[0]);
+        pstmt.setString(2, values[1]);
+        pstmt.setString(3, values[2]);
+        }else {
+        pstmt.setString(3, "");	
+        }
+        pstmt.executeUpdate();  
+    }System.out.println("CSV file has been imported into the database.");
+}
+
+public void saveToCsv(String filePath) throws SQLException, IOException {
+    String tableName = "Recipe_Content";
+    String sql = "SELECT * FROM " + tableName;
+    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+    ResultSet rs = pstmt.executeQuery();
+
+    BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "EUC-KR"));
+    fw.append("RCP_SNO,SRAP_CNT,ING_INFO\n");
+
+    while (rs.next()) {
+        String rcp_sno = rs.getString("RCP_SNO");
+        String SRAP_CNT = rs.getString("SRAP_CNT");
+        String ING_INFO = rs.getString("ING_INFO");
+
+        fw.append(rcp_sno).append(",").append(SRAP_CNT).append(",").append(ING_INFO).append(",").append("\n");
+    }
+
+    fw.flush();
+    fw.close();
+
+    System.out.println("Data has been saved to CSV file successfully.");
+}
     private void close() {
         try {
             if (rs != null) {

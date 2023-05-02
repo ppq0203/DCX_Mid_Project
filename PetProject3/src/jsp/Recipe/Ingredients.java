@@ -121,18 +121,22 @@ public class Ingredients{
 ////		10. 3번 close
 //		con.close();
 		
-		
-//		IngredientDAO i_dao = new IngredientDAO();
-////		Ingredient result = i_dao.selectIngredient("choi123");
-////		if (result != null) {
-////		    System.out.println("ID: " + result.getId());
-////		    System.out.println("이름: " + result.getI_name());
-////		    System.out.println("수량: " + result.getI_quantity());
-////		}
+		//DAO에서 함수 호출하기 위한 준비
 		IngredientDAO i_dao = new IngredientDAO();
+		
+		//ID에 입력된 재료와 수량 조회
+		RecipeDTO result = i_dao.selectIngredient("");
+		if (result != null) {
+			System.out.println("아이디: " + result.getId());
+			System.out.println("재료명: " + result.getING_NAME());
+			System.out.println("보유량: " + result.getING_AMOUNT() + result.getING_UNIT());
+		}
+		//새로운 데이타 1행 입력
 //		i_dao.insertIngredient("asdfasf", "대파", 2);
+		
+		//ID와 재료명으로 데이터 수정 및 삭제
 //		i_dao.updateIngredient("dkqydhd", "양파");
-		i_dao.deleteIngredient("dkqydhd", "계란");
+//		i_dao.deleteIngredient("asdfasf", "대파");
 		
 	}}
 

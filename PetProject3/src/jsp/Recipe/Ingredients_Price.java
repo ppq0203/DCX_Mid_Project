@@ -36,69 +36,84 @@ public class Ingredients_Price{
 //		  JDBC F/W사용
 //		  1. driver 로딩 --> CLASSPATH에서 찾는다.
 //		ex)oracle DB 연결시
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-//		ex)mysql DB 연결실
-//		Class.forName("com.mysql.jdbc.Driver");
-//		  2. 드라이버 관리자 등록
-//		  1번을 할 경우 자동 등록
-//		  3. 2번을 통해서 접속
-		 String url = "";
-		 url = "jdbc:oracle:thin:@localhost:1521:XE";
-		  
-//		  url = "jdbc:mysql://localhost:3306/DBNAME?characterEncoding=utf8&autoReconnect=true";
-		String user = "c##scott";
-		String password = "tiger";
-		Connection con = DriverManager.getConnection(url, user, password);
-		//sql문장
-		String sql = "";  
-//		4 select 명령문을 생성 및 실행
-//		sql = "select *from Ingredients_Price where i_name='식재료이름'";
-////		  
-//		Statement stmt = con.createStatement(); //web의 session같은 존재
-//		
-//		ResultSet result = stmt.executeQuery(sql);
-
-//		5. update 명령문을 생성 및 실행
-//		sql = "UPDATE Ingredients_Price SET i_name = ? WHERE i_price =?";
-//		PreparedStatement stmt = con.prepareStatement(sql); 
-//		stmt.setString(1,?);
-//		stmt.setInt(2,?);
-//		int result = stmt.executeUpdate();
-//	    System.out.println("Update 결과 : " + result); 
-		
-//		if (result.next()) {
-//			
-//			String i_name = result.getString("i_name");			
-//			Int i_price = result.getInt("i_price");
-//			
-//			
-//
-////		데이터 출력
-//			System.out.println("i_name: " + i_name);
-//			System.out.println("i_price: " + i_price);
-//		}else {
-//			System.out.println("레코드가 존재하지 않습니다.");
-//			} 
-//			
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+////		ex)mysql DB 연결실
+////		Class.forName("com.mysql.jdbc.Driver");
+////		  2. 드라이버 관리자 등록
+////		  1번을 할 경우 자동 등록
+////		  3. 2번을 통해서 접속
+//		 String url = "";
+//		 url = "jdbc:oracle:thin:@localhost:1521:XE";
 //		  
-////		4-1. 4번 resultset close
-//		result.close();  
-
-//		6. insert 명령문을 생성 및 실행
-		sql = "insert into Ingredients_Price(i_name, i_price)" +
-			  "values(?,?)";
-		PreparedStatement stmt = con.prepareStatement(sql); 
-				
-//		7 데이터 삽입(레코드세트)
-		stmt.setString(1, "");
-		stmt.setInt(2, 2000);
+////		  url = "jdbc:mysql://localhost:3306/DBNAME?characterEncoding=utf8&autoReconnect=true";
+//		String user = "c##scott";
+//		String password = "tiger";
+//		Connection con = DriverManager.getConnection(url, user, password);
+//		//sql문장
+//		String sql = "";  
+////		4 select 명령문을 생성 및 실행
+////		sql = "select *from Ingredients_Price where i_name='식재료이름'";
+//////		  
+////		Statement stmt = con.createStatement(); //web의 session같은 존재
+////		
+////		ResultSet result = stmt.executeQuery(sql);
+//
+////		5. update 명령문을 생성 및 실행
+////		sql = "UPDATE Ingredients_Price SET i_name = ? WHERE i_price =?";
+////		PreparedStatement stmt = con.prepareStatement(sql); 
+////		stmt.setString(1,?);
+////		stmt.setInt(2,?);
+////		int result = stmt.executeUpdate();
+////	    System.out.println("Update 결과 : " + result); 
+//		
+////		if (result.next()) {
+////			
+////			String i_name = result.getString("i_name");			
+////			Int i_price = result.getInt("i_price");
+////			
+////			
+////
+//////		데이터 출력
+////			System.out.println("i_name: " + i_name);
+////			System.out.println("i_price: " + i_price);
+////		}else {
+////			System.out.println("레코드가 존재하지 않습니다.");
+////			} 
+////			
+////		  
+//////		4-1. 4번 resultset close
+////		result.close();  
+//
+////		6. insert 명령문을 생성 및 실행
+//		sql = "insert into Ingredients_Price(i_name, i_price)" +
+//			  "values(?,?)";
+//		PreparedStatement stmt = con.prepareStatement(sql); 
+//				
+////		7 데이터 삽입(레코드세트)
+//		stmt.setString(1, "");
+//		stmt.setInt(2, 2000);
+//		
+//						
+////		8. 4 or 5 close
+//		stmt.close();
+//		
+////		9. 3번 close
+//		con.close();
+		//DAO에서 함수 호출하기 위한 준비
+		IngredientDAO dao = new IngredientDAO();
 		
-						
-//		8. 4 or 5 close
-		stmt.close();
+		//1개 행 입력하기
+//		dao.insertPrice(ING_NAME, i_price);
 		
-//		9. 3번 close
-		con.close();
+		//재료명으로 가격 조회하기
+		RecipeDTO result = dao.select_Price("128671");
+			if (result != null){
+			System.out.println("재료명: " + result.getING_NAME());
+			System.out.println("가격: " + result.getI_price());		
+				 	} 
+		
+		//ID와 재료명으로 데이터 수정 및 삭제
+		dao.updatePrice(ING_NAME, i_price);
 		 
 }}
 
