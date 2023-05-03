@@ -39,19 +39,25 @@ def code600(item_code):
 
     # per 1kg
     # 고등어 1마리 400g
-    df_data.loc[df_data['item_code'] == 611, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 611, 'dpr1'] * 2.5)
+    df_data.loc[df_data['item_code'] == 611, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 611, 'dpr1'] / 800, 1)
     # 갈치 250g
-    df_data.loc[df_data['item_code'] == 613, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 613, 'dpr1'] * 4)
+    df_data.loc[df_data['item_code'] == 613, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 613, 'dpr1'] / 250, 1)
     # 조기 300g
-    df_data.loc[df_data['item_code'] == 614, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 614, 'dpr1'] * (10 / 3))
+    df_data.loc[df_data['item_code'] == 614, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 614, 'dpr1'] / 300, 1)
     # 명태 580g
-    df_data.loc[df_data['item_code'] == 615, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 615, 'dpr1'] * (100 / 58))
+    df_data.loc[df_data['item_code'] == 615, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 615, 'dpr1'] / 580, 1)
     # 물오징어 1kg 당 2.5마리
-    df_data.loc[df_data['item_code'] == 619, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 619, 'dpr1'] * 2.5)
+    df_data.loc[df_data['item_code'] == 619, 'dpr1'] = round((df_data.loc[df_data['item_code'] == 619, 'dpr1'] * 2.5) / 1000, 1)
     # 건미역
-    df_data.loc[df_data['item_code'] == 642, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 642, 'dpr1'] * 10)
+    df_data.loc[df_data['item_code'] == 642, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 642, 'dpr1'] / 100, 1)
+    # 굴
+    df_data.loc[df_data['item_code'] == 644, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 644, 'dpr1'] / 1000, 1)
+    # 새우젓
+    df_data.loc[df_data['item_code'] == 650, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 650, 'dpr1'] / 1000, 1)
+    # 멸치액젓
+    df_data.loc[df_data['item_code'] == 651, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 651, 'dpr1'] / 1000, 1)
     # 굵은소금
-    df_data.loc[df_data['item_code'] == 652, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 652, 'dpr1'] / 5)
+    df_data.loc[df_data['item_code'] == 652, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 652, 'dpr1'] / 5000, 1)
     print(df_data['dpr1'])
 
     # unit 1
