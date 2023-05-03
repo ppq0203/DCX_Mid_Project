@@ -86,19 +86,20 @@ public class Recipe_Content{
 ////		stmt.setString(1, "");
 ////		stmt.setString(2, "");
 ////		
-//		
+		
 ////		8. 4 or 5 close
 //		stmt.close();
 ////		9. 3번 close
 //		con.close();
+		
 		//DAO에서 함수 호출하기 위한 준비
 		IngredientDAO dao = new IngredientDAO();
 		
 		//csv 파일로 전체 입력하기
-//		 dao.CSV_Recipe_Content("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\SNO_AND_ING_FIX.csv");
-		 dao.saveToCsv("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\test.csv");
-		 //1개 행 입력하기
-//		 dao.insertContent("","","");
+//		dao.CSV_Recipe_Content("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\SNO_AND_ING.csv");
+		dao.saveToCsv1("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\test.csv");
+		//1개 행 입력하기
+//		dao.insertContent("","","");
 		 
 		 
 		}}

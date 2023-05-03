@@ -93,6 +93,7 @@ public class Recipe_Ingredients{
 //		stmt.close();
 ////		9. 3번 close
 //		con.close();
+		
 		//DAO에서 함수 호출하기 위한 준비
 		IngredientDAO dao = new IngredientDAO();
 		
@@ -109,8 +110,8 @@ public class Recipe_Ingredients{
 			System.out.println("레시피이름: " + result.getING_NAME());
 			System.out.println("보유량: " + result.getING_AMOUNT() + result.getING_UNIT());			
 		 	} 
-		 	
-		}}
+}
+	}
 	
 
 	

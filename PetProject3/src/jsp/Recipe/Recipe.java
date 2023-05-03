@@ -108,14 +108,14 @@ public class Recipe{
 		//DAO에서 함수 호출하기 위한 준비
 		IngredientDAO dao = new IngredientDAO();
 		 
-		 //csv 파일로 전체 입력하기
-//		 dao.CSV_Recipe("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\MAIN_RECIPE_TABLE.csv");
+		//csv 파일로 전체 입력하기
+//		dao.CSV_Recipe("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\MAIN_RECIPE_TABLE.csv");
 		 
-		 //1개 행 입력하기
-//		 dao.insertRecipe("126845", "어묵고추장찌개", "찌개","1인분", "초급",  "20분",10);
+		//1개 행 입력하기
+//		dao.insertRecipe("126845", "어묵고추장찌개", "찌개","1인분", "초급",  "20분",10);
 		 
-//		 레시피 넘버로 조회하기
-		 RecipeDTO result = dao.selectRecipe("6258951");
+//		레시피 넘버로 조회하기
+		RecipeDTO result = dao.selectRecipe("6258951");
 		 if (result != null){
 			System.out.println("레시피번호: " + result.getRCP_SNO());
 			System.out.println("요리명: " + result.getCKG_NM());

@@ -99,6 +99,7 @@ public class Ingredients_Price{
 //		
 ////		9. 3번 close
 //		con.close();
+		
 		//DAO에서 함수 호출하기 위한 준비
 		IngredientDAO dao = new IngredientDAO();
 		
@@ -106,14 +107,14 @@ public class Ingredients_Price{
 //		dao.insertPrice(ING_NAME, i_price);
 		
 		//재료명으로 가격 조회하기
-		RecipeDTO result = dao.select_Price("128671");
+		RecipeDTO result = dao.select_Price("배추");
 			if (result != null){
 			System.out.println("재료명: " + result.getING_NAME());
-			System.out.println("가격: " + result.getI_price());		
+			System.out.println("가격: " + result.getI_price()+"원");		
 				 	} 
 		
-		//ID와 재료명으로 데이터 수정 및 삭제
-		dao.updatePrice(ING_NAME, i_price);
+		//ID와 재료명으로 데이터 수정
+//		dao.updatePrice("ING_NAME", i_price);
 		 
 }}
 

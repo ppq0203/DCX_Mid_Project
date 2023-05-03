@@ -4,15 +4,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -419,27 +416,77 @@ public void CSV_Recipe_Content(String csvFilePath) throws SQLException, NumberFo
 }
 
 public void saveToCsv(String filePath) throws SQLException, IOException {
-    String tableName = "Recipe_Content";
-    String sql = "SELECT * FROM " + tableName;
+//    String tableName = "Recipe_Content";
+    String sql = "SELECT r.CKG_NM, r.CKG_KND_ACTO_NM, r.CKG_TIME_NM " + 
+    		"FROM Recipe r " + 
+    		"INNER JOIN Recipe_Ingredients ri ON r.RCP_SNO = ri.RCP_SNO " + 
+    		"INNER JOIN Ingredients i ON ri.ING_NAME = i.ING_NAME " + 
+    		"WHERE i.ING_NAME IN ('돼지고기', '양파', '대파') " + 
+    		"GROUP BY r.CKG_NM, r.CKG_KND_ACTO_NM, r.CKG_TIME_NM " + 
+    		"HAVING COUNT(*) >= 3" + 
+    		"ORDER BY r.CKG_TIME_NM ASC";
     PreparedStatement pstmt = conn.prepareStatement(sql);
-
+//    pstmt.setString(1, "221094");
     ResultSet rs = pstmt.executeQuery();
 
     BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "EUC-KR"));
-    fw.append("RCP_SNO,SRAP_CNT,ING_INFO\n");
+    fw.append("CKG_NM,CKG_KND_ACTO_NM,CKG_TIME_NM\n");
 
     while (rs.next()) {
-        String rcp_sno = rs.getString("RCP_SNO");
-        String SRAP_CNT = rs.getString("SRAP_CNT");
-        String ING_INFO = rs.getString("ING_INFO");
+        String CKG_NM = rs.getString("CKG_NM");
+        String CKG_KND_ACTO_NM = rs.getString("CKG_KND_ACTO_NM");
+        String CKG_TIME_NM = rs.getString("CKG_TIME_NM");
 
-        fw.append(rcp_sno).append(",").append(SRAP_CNT).append(",").append(ING_INFO).append(",").append("\n");
+        fw.append(CKG_NM).append(",").append(CKG_KND_ACTO_NM).append(",").append(CKG_TIME_NM).append(",").append("\n");
     }
-
+    
     fw.flush();
     fw.close();
 
     System.out.println("Data has been saved to CSV file successfully.");
+    
+}
+public void saveToCsv1(String filePath) throws SQLException, IOException {
+    String tableName = "Recipe_Content";
+    String sql = "SELECT * FROM " + tableName + " where ING_INFO = '마늘' ";
+    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+    ResultSet rs = pstmt.executeQuery();
+
+    List<String[]> dataList = new ArrayList<>(); // ArrayList 생성
+    
+    while (rs.next()) {
+        String RCP_SNO = rs.getString("RCP_SNO");
+        String SRAP_CNT = rs.getString("SRAP_CNT");
+        String ING_INFO = rs.getString("ING_INFO");
+        
+        String[] rowData = {RCP_SNO, SRAP_CNT, ING_INFO};
+        dataList.add(rowData);
+        // ArrayList에 데이터 추가
+        
+    }    
+       Arrays.deepToString(dataList.toArray(new String[0][0]));
+   
+    BufferedWriter fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "EUC-KR"));
+    fw.append("RCP_SNO,SRAP_CNT,ING_INFO\n");
+    
+    for (String[] rowData : dataList) {    	
+        fw.append(rowData[0]).append(",").append(rowData[1]).append(",").append(rowData[2]).append(",").append("\n");
+        }
+    
+    fw.flush();
+    fw.close();
+
+    System.out.println("Data has been saved to CSV file successfully.");
+    
+    // ArrayList를 이용하여 데이터 콘솔 출력
+//    for (String[] rowData : dataList){
+//		for (int i = 0; i < rowData.length; i++){
+//			if (rowData[i] == null){
+//                rowData[i] = "";
+//            } 
+//		}System.out.println();
+//    }
 }
     private void close() {
         try {
