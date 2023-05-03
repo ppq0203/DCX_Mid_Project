@@ -9,29 +9,27 @@ ing_list = ['감자', '계란', '고추', '당근', '대파', '마늘', '무무'
 my_dict = {"RCP_SNO":[], "SRAP_CNT":[], "ING_INFO":[]}
 m = df['SRAP_CNT'].quantile(0.9)
 df = df.loc[df["SRAP_CNT"] >= m]
-print(m)
+# print(m)
 
 def content_based_filtering(contents):
     for i, content in enumerate(contents):
         if content == "무":
             contents[i] = "무무"
     print(contents)
-    temp_df = pd.DataFrame(data=[["0", "0", " ".join(contents)]], columns=my_dict)
-    temp_df = temp_df.append(df)
+    # temp_df = pd.DataFrame(data=[["0", "0", " ".join(contents)]], columns=my_dict)
+    # temp_df = temp_df.append(df)
     # print(temp_df)
 
     counter_vector = CountVectorizer(ngram_range=(1, 1))
-    c_vector_ing_info = counter_vector.fit_transform(temp_df['ING_INFO'])
+    c_vector_ing_info = counter_vector.fit_transform(df['ING_INFO'])
+    c_vector_my_info = counter_vector.fit_transform([" ".join(ing_list), " ".join(contents)])
     print(c_vector_ing_info.shape)
 
-    ing_info_c_sim = cosine_similarity(c_vector_ing_info, c_vector_ing_info).argsort()[:, ::-1]
-
-    target_index = temp_df[temp_df["RCP_SNO"] == "0"].index.values
-    sim_index = ing_info_c_sim[target_index, :100].reshape(-1)
-    sim_index = sim_index[sim_index != target_index]
+    ing_info_c_sim = cosine_similarity(c_vector_my_info[1, :], c_vector_ing_info).argsort()[:, ::-1]
+    sim_index = ing_info_c_sim[:, :100].reshape(-1)
 
     # result = append_df.iloc[sim_index].sort_values("SRAP_CNT", ascending=False)[:100]
-    result = temp_df.iloc[sim_index]
+    result = df.iloc[sim_index]
     return result
 
 
