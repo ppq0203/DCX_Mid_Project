@@ -12,5 +12,19 @@ def img_anl(img_url):
     return name, length, quantity, weight
 
 
-img_url = "../img/test_img/po1.jpg"
+img_url = "../img/test_img/KakaoTalk_20230504_091437969.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_01.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_02.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_03.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_04.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_05.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_06.jpg"
+print(img_anl(img_url))
+img_url = "../img/test_img/KakaoTalk_20230504_091437969_07.jpg"
 print(img_anl(img_url))
