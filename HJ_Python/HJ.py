@@ -5,10 +5,10 @@ import pandas as pd
 def read_21type(filename):
     df = pd.read_excel(filename, engine='openpyxl')
     df['길이cm (1개 기준)'] = df['길이cm (1개 기준)'].str.extract(r'(\d+)').astype(float)
-    df['무게 kg (1개 기준)'] = df['무게 kg (1개 기준)'].str.extract(r'(\d+\.\d+)').astype(float)
+    df['무게 g (1개 기준)'] = df['무게 g (1개 기준)'].str.extract(r'(\d+)').astype(float)
 
     type_lengths = df['길이cm (1개 기준)']
-    type_weights = df['무게 kg (1개 기준)']
+    type_weights = df['무게 g (1개 기준)']
 
     result = {}
     index = 0
@@ -53,6 +53,9 @@ def print_info(length, name, data):
     weight = calc_weight(quantity, name, data)
     print("{} 무게: {:.1f}".format(name, weight))
 
+'''21개 list
+감자, 양파, 대파, 고추, 계란, 배추, 무, 당근, 마늘, 고구마, 상추, 오이
+토마토, 고춧가루, 버섯, 앞다리, 삼겹살, 갈비, 목심, 고등어, 갈치'''
 
 # 사용할 엑셀 파일 이름
 filename = "21type.xlsx"
@@ -78,3 +81,4 @@ elif opt == 3:
     quantity = int(input("수량 입력 : "))
     weight = calc_weight(quantity, name, data)
     print("{} 무게: {:.1f}".format(name, weight))
+
