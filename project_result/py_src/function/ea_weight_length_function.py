@@ -7,10 +7,10 @@ file_name = "../csv_file/21type.xlsx"
 def read_21type(filename):
     df = pd.read_excel(filename, engine='openpyxl')
     df['길이cm (1개 기준)'] = df['길이cm (1개 기준)'].str.extract(r'(\d+)').astype(float)
-    df['무게 kg (1개 기준)'] = df['무게 kg (1개 기준)'].str.extract(r'(\d+\.\d+)').astype(float)
+    df['무게 g (1개 기준)'] = df['무게 g (1개 기준)'].str.extract(r'(\d+)').astype(float)
 
     type_lengths = df['길이cm (1개 기준)']
-    type_weights = df['무게 kg (1개 기준)']
+    type_weights = df['무게 g (1개 기준)']
 
     result = {}
     index = 0
@@ -48,11 +48,11 @@ def calc_weight(quantity, name, data=read_21type(file_name)):
         print("Type name not found")
 
 
-def print_info(length, name, data=read_21type(file_name)):
-    quantity = calc_quantity(length, name, data)
-    print("{} 개수: {:.1f}".format(name, quantity))
-    weight = calc_weight(quantity, name, data)
-    print("{} 무게: {:.1f}".format(name, weight))
+# def print_info(length, name, data=read_21type(file_name)):
+#     quantity = calc_quantity(length, name, data)
+#     print("{} 개수: {:.1f}".format(name, quantity))
+#     weight = calc_weight(quantity, name, data)
+#     print("{} 무게: {:.1f}".format(name, weight))
 
 
 # # 사용할 엑셀 파일 이름
