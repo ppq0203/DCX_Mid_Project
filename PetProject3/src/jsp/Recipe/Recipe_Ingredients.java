@@ -108,7 +108,7 @@ public class Recipe_Ingredients{
 		if (result != null){
 			System.out.println("레시피번호: " + result.getRCP_SNO());
 			System.out.println("레시피이름: " + result.getING_NAME());
-			System.out.println("보유량: " + result.getING_AMOUNT() + result.getING_UNIT());			
+			System.out.println("필요수량: " + result.getING_AMOUNT() + result.getING_UNIT());			
 		 	} 
 }
 	}
