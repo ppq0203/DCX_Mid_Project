@@ -40,22 +40,23 @@ def code400(item_code):
 
     # per 1kg
     # 사과 10kg 28개 1kg 당 2.8개
-    df_data.loc[df_data['item_code'] == 411, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 411, 'dpr1'] * 0.28)
+    df_data.loc[df_data['item_code'] == 411, 'dpr1'] = round((df_data.loc[df_data['item_code'] == 411, 'dpr1'] * 0.28) / 1000, 1)
     # 배 15kg 23개 1kg 당 23/15개
-    df_data.loc[df_data['item_code'] == 412, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 412, 'dpr1'] * (10 * (23 / 150)))
-    df_data.loc[df_data['item_code'] == 418, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 418, 'dpr1'] * 10)
+    df_data.loc[df_data['item_code'] == 412, 'dpr1'] = round((df_data.loc[df_data['item_code'] == 412, 'dpr1'] * (10 * (23 / 150))) / 1000, 1)
+    df_data.loc[df_data['item_code'] == 414, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 414, 'dpr1'] / 1000, 1)
+    df_data.loc[df_data['item_code'] == 418, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 418, 'dpr1'] / 100, 1)
     # 참다래 10kg 100개, 1kg 10개
-    df_data.loc[df_data['item_code'] == 419, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 419, 'dpr1'])
+    df_data.loc[df_data['item_code'] == 419, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 419, 'dpr1'] / 1000, 1)
     # 파인애플 1개 2kg
-    df_data.loc[df_data['item_code'] == 420, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 420, 'dpr1'] / 2)
+    df_data.loc[df_data['item_code'] == 420, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 420, 'dpr1'] / 2000, 1)
     # 오렌지 10개 18kg 72개, 1kg 4개
-    df_data.loc[df_data['item_code'] == 421, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 421, 'dpr1'] * (2 / 5))
+    df_data.loc[df_data['item_code'] == 421, 'dpr1'] = round((df_data.loc[df_data['item_code'] == 421, 'dpr1'] * (2 / 5)) / 1000, 1)
     # 레몬 10개 1개 155g, 10개 1.6kg
-    df_data.loc[df_data['item_code'] == 424, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 424, 'dpr1'] / 1.6)
+    df_data.loc[df_data['item_code'] == 424, 'dpr1'] = round((df_data.loc[df_data['item_code'] == 424, 'dpr1'] / 1.6) / 1000, 1)
     # 망고 1개 375g
-    df_data.loc[df_data['item_code'] == 428, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 428, 'dpr1'] * (1000 / 375))
+    df_data.loc[df_data['item_code'] == 428, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 428, 'dpr1'] / 375, 1)
     # 아보카도 200g
-    df_data.loc[df_data['item_code'] == 430, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 430, 'dpr1'] * 5)
+    df_data.loc[df_data['item_code'] == 430, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 430, 'dpr1'] / 200, 1)
     print(df_data['dpr1'])
 
     # unit 1

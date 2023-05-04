@@ -18,7 +18,7 @@ import time
 # driver = webdriver.Chrome(ChromeDriverManager().install()) # 설치가 안되어 있을 경우
 driver = webdriver.Chrome()
 search = input()
-crawling_url = "https://www.ssg.com/search.ssg?target=all&query=" + search + "kg"
+crawling_url = "https://www.ssg.com/search.ssg?target=all&query=" + search + "%271kg%27"
 driver.get(crawling_url)
 
 # 3. Parsing html code

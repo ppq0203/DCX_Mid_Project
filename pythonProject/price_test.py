@@ -38,6 +38,7 @@ days_1 = datetime.timedelta(days=1) # 오늘 날짜 기준 추가 하루
 beforDate = now-days_1 # 오늘 날짜 - 1일 = 어제 날짜
 print(beforDate)
 date = beforDate.strftime('%Y-%m-%d') # 어제 날짜 형식 : y-m-d
+date = beforDate.strftime('2023-04-28')
 print(date)
 
 # item_code 별 원본 csv

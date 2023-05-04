@@ -45,12 +45,14 @@ def code500(item_code):
     df_data.reset_index(drop=True, inplace=True)
 
     # per 1kg
-    df_data.loc[df_data['item_code'] == 4301, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4301, 'dpr1'] * 10)
-    df_data.loc[df_data['item_code'] == 4304, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4304, 'dpr1'] * 10)
-    df_data.loc[df_data['item_code'] == 4401, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4401, 'dpr1'] * 10)
-    df_data.loc[df_data['item_code'] == 4402, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4402, 'dpr1'] * 10)
+    df_data.loc[df_data['item_code'] == 4301, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4301, 'dpr1'] / 100, 1)
+    df_data.loc[df_data['item_code'] == 4304, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4304, 'dpr1'] / 100, 1)
+    df_data.loc[df_data['item_code'] == 4401, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4401, 'dpr1'] / 100, 1)
+    df_data.loc[df_data['item_code'] == 4402, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 4402, 'dpr1'] / 100, 1)
+    df_data.loc[df_data['item_code'] == 9901, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 9901, 'dpr1'] / 1000, 1)
     # 특란 30구 개당 60g
-    df_data.loc[df_data['item_code'] == 9903, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 9903, 'dpr1'] *(100 / 6))
+    df_data.loc[df_data['item_code'] == 9903, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 9903, 'dpr1'] / (30 * 60), 1)
+    df_data.loc[df_data['item_code'] == 9908, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 9908, 'dpr1'] / 1000, 1)
     print(df_data['dpr1'])
 
     # unit 1

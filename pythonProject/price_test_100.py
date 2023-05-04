@@ -45,13 +45,13 @@ def code100(item_code):
     # print(df_data.dtypes)
 
     # per 1kg
-    df_data.loc[df_data['item_code'] == 111, 'dpr1'] = df_data.loc[df_data['item_code'] == 111, 'dpr1'] / 20
-    df_data.loc[df_data['item_code'] == 112, 'dpr1'] = df_data.loc[df_data['item_code'] == 112, 'dpr1']
-    df_data.loc[df_data['item_code'] == 141, 'dpr1'] = df_data.loc[df_data['item_code'] == 141, 'dpr1'] * 2
-    df_data.loc[df_data['item_code'] == 142, 'dpr1'] = df_data.loc[df_data['item_code'] == 142, 'dpr1'] * 2
-    df_data.loc[df_data['item_code'] == 143, 'dpr1'] = df_data.loc[df_data['item_code'] == 143, 'dpr1'] * 2
-    df_data.loc[df_data['item_code'] == 151, 'dpr1'] = df_data.loc[df_data['item_code'] == 151, 'dpr1']
-    df_data.loc[df_data['item_code'] == 152, 'dpr1'] = df_data.loc[df_data['item_code'] == 152, 'dpr1'] * 10
+    df_data.loc[df_data['item_code'] == 111, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 111, 'dpr1'] / 20000, 1)
+    df_data.loc[df_data['item_code'] == 112, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 112, 'dpr1'] / 1000, 1)
+    df_data.loc[df_data['item_code'] == 141, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 141, 'dpr1'] / 500, 1)
+    df_data.loc[df_data['item_code'] == 142, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 142, 'dpr1'] / 500, 1)
+    df_data.loc[df_data['item_code'] == 143, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 143, 'dpr1'] / 500, 1)
+    df_data.loc[df_data['item_code'] == 151, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 151, 'dpr1'] / 1000, 1)
+    df_data.loc[df_data['item_code'] == 152, 'dpr1'] = round(df_data.loc[df_data['item_code'] == 152, 'dpr1'] / 100, 1)
     print(df_data['dpr1'])
 
     # unit 1

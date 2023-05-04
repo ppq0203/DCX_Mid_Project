@@ -114,9 +114,12 @@ public class Ingredients_Img{
 ////		8. 4 or 5 close
 //		stmt.close();
 ////		9. 3번 close
-//		con.close();}	 
+//		con.close();}	
+		//함수 호출을 위한 준비
 		IngredientDAO i_dao = new IngredientDAO();
-		i_dao.insertImg("name", "color", 1.1f, 1.1f, "imgname", "imgurl");
+		
+		//1행 데이터 저장하기 위함
+		i_dao.insertImg("식재료이름", "색상", 길이, 무게, "이미지이름", "이미지url");
 		
 }}
 
