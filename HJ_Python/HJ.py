@@ -81,3 +81,4 @@ elif opt == 3:
     quantity = int(input("수량 입력 : "))
     weight = calc_weight(quantity, name, data)
     print("{} 무게: {:.1f}".format(name, weight))
+
