@@ -90,5 +90,6 @@ def get_prices_recipes(my_ing_list):
 
     return my_df[:100]
 
-my_ing_list = [["당근", 500], ["무", 500], ["양파", 500], ["고추", 500]]
+my_ing_list = [["당근", 500], ["무", 500],
+               ["양파", 500], ["고추", 500]]
 print(get_prices_recipes(my_ing_list))
