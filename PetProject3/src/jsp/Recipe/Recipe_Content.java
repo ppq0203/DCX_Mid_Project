@@ -97,7 +97,7 @@ public class Recipe_Content{
 		
 		//csv 파일로 전체 입력하기
 //		dao.CSV_Recipe_Content("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\SNO_AND_ING.csv");
-		dao.saveToCsv1("C:\\Users\\anyware\\Desktop\\밥사조 프로젝트\\test.csv");
+		dao.saveToCsv("asdfasf");
 		//1개 행 입력하기
 //		dao.insertContent("","","");
 		 
